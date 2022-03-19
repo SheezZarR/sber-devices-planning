@@ -4,10 +4,10 @@
 Серверная часть разработана на Django Rest Framework.
 Находится в папке `back/`
 
-Разрабатывал: @github/oCatano
+Разрабатывал: @oCatano
 
 ## Frontend (React) 
 Пользовательская часть написана на React, используется библиотека Сбер - [Plasma](https://plasma.sberdevices.ru/).
 Находится в папке `front/`
 
-Разрабатывал: @github/Starman-in-the-Sky
+Разрабатывал: @Starman-in-the-Sky
