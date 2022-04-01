@@ -3,7 +3,7 @@ from django.http import JsonResponse
 
 
 def tasksGetAPIresponce(request):
-    data = {'get':"Всё ок"}
+    data = {'get': "Всё ок"}
     return JsonResponse(data)
 
 
@@ -25,3 +25,8 @@ def tasksDeleteAPIresponce(request):
 def profileGetAPIresponce(request):
     data = {'get': "Всё ок"}
     return JsonResponse(data)
+
+
+# Gives ID in table, when delete(plannerApi.Task.task_category.on_delete)
+def id():
+    return 1
