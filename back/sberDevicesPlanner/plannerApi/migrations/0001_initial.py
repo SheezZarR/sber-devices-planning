@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
                 ('completion', models.BooleanField(default=None)),
                 ('subtask', models.BooleanField()),
                 ('ID_User', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='plannerApi.user')),
-                ('task_category', models.ForeignKey(default=None, on_delete=models.SET(plannerApi.views.id), to='plannerApi.taskstype')),
+                ('task_category', models.ForeignKey(default=None, on_delete=models.SET(plannerApi.models.id), to='plannerApi.taskstype')),
             ],
         ),
         migrations.CreateModel(
