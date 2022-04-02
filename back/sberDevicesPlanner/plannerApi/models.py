@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import User
 from .views import id
 
 
@@ -9,21 +9,15 @@ class TasksType(models.Model):
     title = models.CharField(max_length=255)
 
 
-class User(AbstractBaseUser):
-    username = models.CharField(max_length=255, unique=True)
-    password = models.CharField(max_length=255, unique=True)
-
-
 class Task(models.Model):
     ID_Task = models.AutoField(primary_key=True)
-    ID_User = models.ForeignKey(to='User', on_delete=models.CASCADE)
+    ID_User = models.ForeignKey(to=User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
     start_task_date = models.DateTimeField(auto_now_add=True)
     completion_date = models.DateTimeField(auto_now=True)
-    task_category = models.ForeignKey(to='TasksType', default=None, on_delete=models.SET(id))
+    task_category = models.ForeignKey(to='TasksType', default=id(), on_delete=models.CASCADE)
     completion = models.BooleanField(default=None)
-    subtask = models.BooleanField()
 
 
 class Subtasks(models.Model):
@@ -39,7 +33,7 @@ class LogTasks(models.Model):
 
 class Habits(models.Model):
     ID_Habits = models.AutoField(primary_key=True)
-    ID_User = models.ForeignKey(to='User', on_delete=models.CASCADE)
+    ID_User = models.ForeignKey(to=User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     creation_date = models.DateTimeField(auto_now_add=True)
     next_day_offset = models.DateTimeField()
@@ -47,7 +41,4 @@ class Habits(models.Model):
 
 
 class LogHabits(models.Model):
-    ID_Habits = models.ForeignKey(to='Habits', to_field='ID_Habits',on_delete=models.CASCADE)
-
-
-
+    ID_Habits = models.ForeignKey(to='Habits', to_field='ID_Habits', on_delete=models.CASCADE)

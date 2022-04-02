@@ -27,6 +27,6 @@ def profileGetAPIresponce(request):
     return JsonResponse(data)
 
 
-# Gives ID in table, when delete(plannerApi.Task.task_category.on_delete)
+# Gives default ID to planerApi.models.Task.Task_category
 def id():
     return 1
