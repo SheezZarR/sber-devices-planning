@@ -1,0 +1,8 @@
+.Task_list{
+    flex-direction: column;
+    display: flex;
+    padding: 15px;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+}
