@@ -1,5 +1,6 @@
 import React from 'react'
-const Tasks_menu = () => {
+
+const Task_menu = () => {
     return(
         <div>
             <ul>
@@ -10,4 +11,4 @@ const Tasks_menu = () => {
         </div>
     )
 }
-export default Tasks_menu;
+export default Task_menu;

@@ -1,10 +1,10 @@
 import React from 'react'
-import Tasks_menu from "./Components/Tasks_menu";
+import Task_list from "../components/Task_list";
 
 const Tasks = () => {
     return(
         <div>
-            <Tasks_menu/>
+            <Task_list/>
         </div>
     )
 }
