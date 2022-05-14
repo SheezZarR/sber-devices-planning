@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 CORS_ALLOWED_ORIGINS = ['https://developers.sber.ru']
 
 CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
+CORS_ALLOWED_ORIGINS.append("http://localhost")
 CORS_ALLOWED_ORIGINS.append("http://127.0.0.1:8001")
 CORS_ALLOWED_ORIGINS.append("http://0.0.0.0:3000")
 ALLOWED_HOSTS.append("0.0.0.0")
