@@ -26,7 +26,17 @@ SECRET_KEY = 'django-insecure-(f0^(&*i9dd6i*nlbni0az!eb2!8s2dw6=5hziu(mb3zgnhmcr
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CORS_ALLOWED_ORIGINS = ['https://developers.sber.ru']
 
+CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
+CORS_ALLOWED_ORIGINS.append("http://127.0.0.1:8001")
+CORS_ALLOWED_ORIGINS.append("http://0.0.0.0:3000")
+ALLOWED_HOSTS.append("0.0.0.0")
+ALLOWED_HOSTS.append("0.0.0.0:3000")
+ALLOWED_HOSTS.append("127.0.0.1")
+ALLOWED_HOSTS.append("127.0.0.1:8001")
+ALLOWED_HOSTS.append("localhost")
+ALLOWED_HOSTS.append("localhost:3000")
 
 # Application definition
 
@@ -39,9 +49,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'plannerApi',
     'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
