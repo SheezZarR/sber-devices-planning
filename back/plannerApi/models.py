@@ -4,8 +4,10 @@ from django.contrib.auth.models import User
 
 # Gives default ID to .models.Task.Task_category
 def id():
-    return 1
-    #return TasksType.objects.all()[:1]
+    if TasksType.objects.all():
+        return TasksType.objects.all()[0]
+    else:
+        return 1
 
 
 class TasksType(models.Model):
