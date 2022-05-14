@@ -10,6 +10,8 @@ import Profile from './pages/Profile'
 import Achievements from './pages/Achievements'
 import Background_app from "./components/Background";
 import Navbar from "./components/Navbar";
+
+import './Styles/Task_list.css'
 import './Styles/Task_list_item.css'
 
 const App = () => {
