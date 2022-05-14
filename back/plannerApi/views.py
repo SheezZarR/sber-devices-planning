@@ -17,13 +17,9 @@ class TaskViewset(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
-    # def get_queryset(self):
-    #     temp = Task.objects.all().values('completion_date')
-    #     d = {}
-    #     for item in temp:
-    #         d[f'{item}'] = Task.objects.get(completion_date=item)
-    #
-    #     return JsonResponse(d)
+    def get_queryset(self):
+        temp = Task.objects.all().order_by('completion_date')
+        return temp
 
 
 class TasksTypeViewset(viewsets.ModelViewSet):
