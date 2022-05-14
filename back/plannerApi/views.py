@@ -19,7 +19,13 @@ class TaskViewset(viewsets.ModelViewSet):
 
     def get_queryset(self):
         temp = Task.objects.all().order_by('completion_date')
-        return temp
+        temp_set = set()
+        for item in temp:
+            temp_set.add(item.completion_date)
+        t_dict = dict()
+        for item in temp_set:
+            t_dict[item] = temp.filter(completion_date=item)
+        return (t_dict)
 
 
 class TasksTypeViewset(viewsets.ModelViewSet):
