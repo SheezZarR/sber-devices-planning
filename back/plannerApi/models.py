@@ -18,9 +18,9 @@ class Task(models.Model):
     Task = models.AutoField(primary_key=True)
     User = models.ForeignKey(to=User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    description = models.TextField(default=None)
+    description = models.TextField(default=None, null=True)
     start_task_date = models.DateTimeField(auto_now_add=True)
-    completion_date = models.DateTimeField(default=None)
+    completion_date = models.DateTimeField(default=None, null=True)
     task_category = models.ForeignKey(to='TasksType', default=id(), on_delete=models.CASCADE, related_name='type_task')
     completion = models.BooleanField(default=None)
 
