@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar";
 
 import './Styles/Task_list.css'
 import './Styles/Task_list_item.css'
+import './Styles/Calendar.css'
 
 const App = () => {
   return (

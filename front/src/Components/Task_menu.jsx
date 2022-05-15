@@ -1,6 +1,8 @@
 import React,{ useState } from 'react'
 import{Task_list} from "./Task_list"
 
+/*scrollIntoView({ behavior: 'smooth' })*/
+
 const Task_menu = (props) => {
     let task_arr = [
         {date: "14/5/2022", tasks: [

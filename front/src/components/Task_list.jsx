@@ -7,7 +7,9 @@ export const Task_list = (props) => {
 
     return (
         <div className="Tasklist">
-            <strong>{date}</strong>
+            <div className="Tasklist_date">
+                <strong>{date}</strong>
+            </div>
             {
                 tasks.map((Task_Item) => (
                     <TaskItem

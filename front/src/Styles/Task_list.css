@@ -3,6 +3,11 @@
     display: flex;
     padding: 15px;
     margin-top: 15px;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
+    left: 180px;
+    bottom: 300px;
+}
+
+.Tasklist_date{
+    margin: 10px;
 }
