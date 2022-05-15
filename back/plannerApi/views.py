@@ -17,13 +17,15 @@ class TaskViewset(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
-    # def get_queryset(self):
-    #     temp = Task.objects.all().values('completion_date')
-    #     d = {}
-    #     for item in temp:
-    #         d[f'{item}'] = Task.objects.get(completion_date=item)
-    #
-    #     return JsonResponse(d)
+    def get_queryset(self):
+        temp = Task.objects.all().order_by('completion_date')
+        temp_set = set()
+        for item in temp:
+            temp_set.add(item.completion_date)
+        t_dict = dict()
+        for item in temp_set:
+            t_dict[item] = temp.filter(completion_date=item)
+        return (t_dict)
 
 
 class TasksTypeViewset(viewsets.ModelViewSet):

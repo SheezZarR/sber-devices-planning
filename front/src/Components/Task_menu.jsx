@@ -1,14 +1,25 @@
 import React,{ useState } from 'react'
-import {Task_list} from "./Task_list";
+import{Task_list} from "./Task_list"
 
 const Task_menu = (props) => {
-    const[task_lists, set_task_lists] = useState([
-
-    ])
+    let task_arr = [
+        {date: "14/5/2022", tasks: [
+            {id: 1, text: 'Egg'},
+            {id: 2, text: 'Manacrypt'},
+            {id: 3, text: 'Lava'},
+            {id: 4, text: 'Crane'},
+        ]},
+        {date: "16/5/2022", tasks:[
+            {id: 5, text: 'Bitcoin'},
+            {id: 6, text: 'Buy a car'},
+            {id: 7, text: 'Ponder'},
+            {id: 8, text: 'Man'},
+        ]},
+    ]
     return (
         <div className="Task_Menu">
-            {task_lists.map(Task_list =>
-                <Task_list Task_list={Task_list} key={Task_list.id}/>
+            {task_arr.map((Tasklist) =>
+                <Task_list date={Tasklist.date} tasks={Tasklist.tasks}/>
             )}
         </div>
     );
