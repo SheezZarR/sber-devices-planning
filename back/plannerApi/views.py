@@ -21,10 +21,13 @@ class TaskViewset(viewsets.ModelViewSet):
         temp = Task.objects.all().order_by('completion_date')
         temp_set = set()
         for item in temp:
-            temp_set.add(item.completion_date)
+            # tmp_date = item.completion_date..split('T')[0]
+            # tmp_date = tmp_date.split('-')
+            temp_set.add("tmp_date")
+
         t_dict = dict()
         for item in temp_set:
-            t_dict[item] = temp.filter(completion_date=item)
+            t_dict[item] = list(temp.filter(completion_date=item))
         return (t_dict)
 
 

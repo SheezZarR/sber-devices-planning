@@ -12,7 +12,7 @@ def id():
 
 class TasksType(models.Model):
     task = models.AutoField(primary_key=True)
-    User = models.ForeignKey(to=User, default=1, on_delete=models.CASCADE)
+    User = models.ForeignKey(to=User, default=None, null=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
 
 
@@ -23,7 +23,7 @@ class Task(models.Model):
     description = models.TextField(default=None, null=True)
     start_task_date = models.DateTimeField(auto_now_add=True)
     completion_date = models.DateTimeField(default=None, null=True)
-    task_category = models.ForeignKey(to='TasksType', default=id(), on_delete=models.CASCADE, related_name='type_task')
+    task_category = models.ForeignKey(to='TasksType', default=None, null=True, on_delete=models.CASCADE, related_name='type_task')
     completion = models.BooleanField(default=None)
 
 
