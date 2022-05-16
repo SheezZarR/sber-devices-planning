@@ -17,6 +17,18 @@ const Task_menu = (props) => {
             {id: 7, text: 'Ponder'},
             {id: 8, text: 'Man'},
         ]},
+        {date: "14/5/2022", tasks: [
+                {id: 1, text: 'Egg'},
+                {id: 2, text: 'Manacrypt'},
+                {id: 3, text: 'Lava'},
+                {id: 4, text: 'Crane'},
+        ]},
+        {date: "16/5/2022", tasks:[
+                {id: 5, text: 'Bitcoin'},
+                {id: 6, text: 'Buy a car'},
+                {id: 7, text: 'Ponder'},
+                {id: 8, text: 'Man'},
+        ]},
     ]
     return (
         <div className="Task_Menu">

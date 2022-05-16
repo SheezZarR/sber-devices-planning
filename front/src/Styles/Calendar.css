@@ -11,9 +11,9 @@
     box-shadow: 0 12px 24px rgb(63, 147, 90);
     font-family: "SB Sans Text", "SB Sans Display";
     line-height: 1.125em;
-    position: relative;
+    position: fixed;
     left: 1000px;
-    bottom: 850px;
+    bottom: 200px;
 }
 .react-calendar--doubleView {
     width: 700px;
