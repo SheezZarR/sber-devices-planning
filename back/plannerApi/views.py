@@ -1,3 +1,5 @@
+import calendar
+
 from django.forms import model_to_dict
 from django.http import JsonResponse
 from rest_framework import viewsets
@@ -13,22 +15,41 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
+class TaskDictTimeQueryset(APIView):
+
+    def get(self, request):
+        temp = Task.objects.all().order_by('completion_date')
+        if not list(temp):
+            return []
+        temp_set = set()
+        month_dict = dict((index, month) for index, month in enumerate(calendar.month_abbr) if month)
+        for item in temp:
+            tmp_date = str(item.completion_date).split('T')[0]
+            tmp_date = tmp_date.split('-')
+            if not tmp_date[0] == 'None':
+                date_str = str(tmp_date[2]) + '_' + month_dict[int(tmp_date[1])] + '_' + str(tmp_date[0])
+                temp_set.add(date_str)
+
+        t_dict = dict()
+        for item in temp_set:
+            a=[]
+            query_set_filtered = temp.filter(completion_date=item)
+            for item in query_set_filtered:
+                a.append(list(item))
+            t_dict[item] = a
+
+        a = []
+        query_set_filtered = temp.filter(completion_date=None)
+        for item in query_set_filtered:
+            a.append(TaskSerializer(item).data)
+        t_dict['No_date'] = a
+        return JsonResponse(data=t_dict, status=200)
+
+
 class TaskViewset(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
-    def get_queryset(self):
-        temp = Task.objects.all().order_by('completion_date')
-        temp_set = set()
-        for item in temp:
-            # tmp_date = item.completion_date..split('T')[0]
-            # tmp_date = tmp_date.split('-')
-            temp_set.add("tmp_date")
-
-        t_dict = dict()
-        for item in temp_set:
-            t_dict[item] = list(temp.filter(completion_date=item))
-        return (t_dict)
 
 
 class TasksTypeViewset(viewsets.ModelViewSet):

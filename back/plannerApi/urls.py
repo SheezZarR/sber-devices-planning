@@ -32,6 +32,7 @@ urlpatterns = [
     path('api/', include(log_tasks_router.urls)),
     path('api/', include(log_habits_router.urls)),
     path('api/', include(habits_router.urls)),
+    path('api/formated_tasks/', views.TaskDictTimeQueryset.as_view(), name="Misha_zaberi")
     # path('api/tasks/', views.TasksApiView.as_view(), name='get_tasks'),
     # path('api/tasks/', views.TasksApiView.as_view(), name='post_tasks'),
     # path('api/tasks/', views.TasksApiView.as_view(), name='delete_tasks'),
