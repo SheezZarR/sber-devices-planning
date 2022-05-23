@@ -5,6 +5,7 @@
   "dependencies": {
     "@salutejs/plasma-icons": "^1.81.1",
     "@salutejs/plasma-tokens": "^1.18.1",
+    "@salutejs/plasma-typo": "^0.6.2",
     "@salutejs/plasma-ui": "^1.101.1",
     "@sberdevices/assistant-client": "^5.0.2",
     "@testing-library/jest-dom": "^5.16.3",

@@ -2,8 +2,7 @@
 @import "https://cdn-app.sberdevices.ru/shared-static/0.0.0/styles/SBSansDisplay.0.1.0.css";
 
 .react-calendar {
-    width: 800px;
-    max-width: 100%;
+    max-width: 50%;
     background-color: clear;
     color: #2cb049;
     border-radius: 8px;
@@ -11,8 +10,9 @@
     font-family: "SB Sans Text", "SB Sans Display";
     line-height: 1.125em;
     position: fixed;
-    left: 1000px;
-    bottom: 200px;
+    right: 0;
+    bottom: 0.5vh;
+    padding: 1rem;
 }
 .react-calendar--doubleView {
     width: 700px;
@@ -39,9 +39,8 @@
     font-weight: bolder;
     margin: 0;
     border: 0;
-    padding-bottom: 30px;
-    padding-top: 30px;
     outline: none;
+    transition: .15s all ease-in-out;
 }
 .react-calendar button:enabled:hover {
     cursor: pointer;
@@ -97,7 +96,7 @@
 }
 .react-calendar__tile {
     max-width: 100%;
-    padding: 10px 6.6667px;
+    padding: 30px 6.6667px;
     background: none;
     font-family: "SB Sans Text";
     text-align: center;
