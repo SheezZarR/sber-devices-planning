@@ -34,8 +34,13 @@
     box-sizing: border-box;
 }
 .react-calendar button {
+    font-family: "SB Sans Text";
+    font-size: 18px;
+    font-weight: bolder;
     margin: 0;
     border: 0;
+    padding-bottom: 30px;
+    padding-top: 30px;
     outline: none;
 }
 .react-calendar button:enabled:hover {
@@ -50,8 +55,8 @@
     color: #2cb049;
     min-width: 44px;
     background: none;
-    font-family: "SB Sans Text" ;
-    font-size: 16px;
+    font-family: "SB Sans Text";
+    font-size: 20px;
     margin-top: 8px;
 }
 .react-calendar__navigation button:disabled {
@@ -108,7 +113,7 @@
     border-radius: 6px;
 }
 .react-calendar__tile--now {
-    background: #6f48eb33;
+    background: #3c8353;
     border-radius: 6px;
     font-family: "SB Sans Text";
     font-weight: bold;
@@ -116,14 +121,14 @@
 }
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-    background: #6f48eb33;
+    background: #3c8353;
     border-radius: 6px;
     font-family: "SB Sans Text";
     font-weight: bold;
     color: #2cb049;
 }
 .react-calendar__tile--hasActive {
-    background: #76baff;
+    background: #64a165;
 }
 .react-calendar__tile--hasActive:enabled:hover,
 .react-calendar__tile--hasActive:enabled:focus {
