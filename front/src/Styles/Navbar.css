@@ -1,0 +1,16 @@
+.nav-wrapper > * {
+    box-sizing: border-box;
+}
+
+.nav-wrapper {
+    height: 100%;
+    background-color: #0a343d;
+    position: relative;
+    
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+}

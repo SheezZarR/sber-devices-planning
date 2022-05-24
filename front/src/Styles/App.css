@@ -1,5 +1,17 @@
 body {
+    position: relative;
     margin: 0;
+}
+
+.app-content-wrapper {
+    display: grid;
+    grid-template-columns: 0.15fr 1.05fr 1.8fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        ". . .";
+    column-gap: 1rem;
 }
 
 .App {

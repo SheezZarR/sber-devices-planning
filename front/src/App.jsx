@@ -15,6 +15,7 @@ import Profile from './pages/Profile'
 import Achievements from './pages/Achievements'
 import Background_app from "./components/Background";
 import Navbar from "./components/Navbar";
+import Calendar_menu from "./components/Calendar";
 
 import './Styles/Task_list.css'
 import './Styles/Task_list_item.css'
@@ -25,7 +26,7 @@ import './Styles/App.css'
 const initAssistant = (getState) => {
 	if (process.env.NODE_ENV === "development") {
 		return createSmartappDebugger({
-			token: process.env['REACT_APP_TOKEN'] ?? "",
+			token: process.env.REACT_APP_TOKEN ?? "",
 			initPhrase: "Открой Plan Up",
 			getState
 		});
@@ -47,12 +48,13 @@ const App = () => {
   return (
 		<div className='app-wrapper'>
 			<Background_app/>
-			<Navbar/>
-			<div class='app-wrapper-content'>
+			<div className='app-content-wrapper'>
+				<Navbar/>
 				<Tasks/>
-				{/*<Achievements/>
-				<Profile/>*/}
+				<Calendar_menu/>
 			</div>
+			{/*<Achievements/>
+			<Profile/>*/}
 		</div>
   );
 }

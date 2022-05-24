@@ -1,11 +1,12 @@
 .Tasklist{
     flex-direction: column;
     display: flex;
-    padding: 15px;
-    margin-top: 15px;
-    margin-left: 100px;
 }
 
 .Tasklist_date{
     margin: 10px;
+}
+
+.Tasklist > .task_item {
+    padding-left: 0.5rem;
 }
