@@ -6,9 +6,8 @@
 }
 
 .calendar-container {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
+    position: sticky;
+    top: 15%;
 }
 
 .react-calendar {

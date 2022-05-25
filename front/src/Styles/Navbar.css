@@ -12,5 +12,6 @@
 .nav {
     display: flex;
     flex-direction: column;
-    position: fixed;
+    position: sticky;
+    top: 0;
 }

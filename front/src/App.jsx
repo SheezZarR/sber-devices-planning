@@ -27,7 +27,7 @@ const initAssistant = (getState) => {
 	if (process.env.NODE_ENV === "development") {
 		return createSmartappDebugger({
 			token: process.env.REACT_APP_TOKEN ?? "",
-			initPhrase: "Открой Plan Up",
+			initPhrase: "Открой ${process.env.REACT_APP_SMARTAPP}",
 			getState
 		});
 	}
@@ -35,6 +35,7 @@ const initAssistant = (getState) => {
 }
 
 const App = () => {
+	console.log(process.env)
 	const assistantStateRef = useRef(null);
 	const assistant = useRef(null);
 
