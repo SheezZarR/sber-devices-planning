@@ -18,32 +18,47 @@ class UserViewSet(viewsets.ModelViewSet):
 class TaskDictTimeQueryset(APIView):
 
     def get(self, request):
-        temp = Task.objects.all().order_by('completion_date')
-        if not list(temp):
+        tasks_by_date = Task.objects.all().order_by('completion_date')
+
+        if not list(tasks_by_date):
             return []
-        temp_set = set()
+
+        lookup_dates = []
         month_dict = dict((index, month) for index, month in enumerate(calendar.month_abbr) if month)
-        for item in temp:
-            tmp_date = str(item.completion_date).split('T')[0]
-            tmp_date = tmp_date.split('-')
-            if not tmp_date[0] == 'None':
-                date_str = str(tmp_date[2]) + '_' + month_dict[int(tmp_date[1])] + '_' + str(tmp_date[0])
-                temp_set.add(date_str)
 
-        t_dict = dict()
-        for item in temp_set:
-            a=[]
-            query_set_filtered = temp.filter(completion_date=item)
+        for item in tasks_by_date:
+            tmp_date = str(item.completion_date).rsplit(' ')[0]
+            date_split = tmp_date.split('-')
+            if not date_split[0] == 'None':
+                lookup_dates.append({"year": date_split[0], "month": date_split[1], "day": date_split[2]})
+
+        tasks_grouped_by_date = dict()
+
+        for date in lookup_dates:
+            tasks_group = []
+            query_set_filtered = tasks_by_date.filter(
+                completion_date__year=date['year'],
+                completion_date__month=date['month'],
+                completion_date__day=date['day']
+            )
+
             for item in query_set_filtered:
-                a.append(list(item))
-            t_dict[item] = a
+                tasks_group.append(TaskSerializer(item).data)
 
-        a = []
-        query_set_filtered = temp.filter(completion_date=None)
+            date_str = f"{date['day']} {month_dict[int(date['month'])]} {date['year']}"
+            tasks_grouped_by_date[date_str] = tasks_group
+
+        tasks_group = []
+        query_set_filtered = tasks_by_date.filter(completion_date=None)
+
         for item in query_set_filtered:
-            a.append(TaskSerializer(item).data)
-        t_dict['No_date'] = a
-        return JsonResponse(data=t_dict, status=200)
+            tasks_group.append(TaskSerializer(item).data)
+
+        tasks_grouped_by_date['Без времени'] = tasks_group
+
+        print(tasks_grouped_by_date)
+
+        return JsonResponse(data=tasks_grouped_by_date, status=200)
 
 
 class TaskViewset(viewsets.ModelViewSet):
