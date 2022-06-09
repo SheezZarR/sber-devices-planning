@@ -9,7 +9,11 @@ function Calendar_menu() {
     return (
         <div className='cal_menu'>
             <div className='calendar-container'>
-                <Calendar onChange={setDate} value={date} />
+                <Calendar 
+                onChange={setDate} 
+                value={date}
+                locale="ru" 
+                />
             </div>
         </div>
     );

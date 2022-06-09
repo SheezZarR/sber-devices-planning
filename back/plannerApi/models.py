@@ -18,7 +18,7 @@ class TasksType(models.Model):
 
 class Task(models.Model):
     Task = models.AutoField(primary_key=True)
-    User = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    sber_user_id = models.CharField(max_length=255, default="")
     title = models.CharField(max_length=255)
     description = models.TextField(default=None, null=True)
     start_task_date = models.DateTimeField(auto_now_add=True)

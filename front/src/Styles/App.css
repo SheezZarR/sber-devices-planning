@@ -3,6 +3,10 @@ body {
     margin: 0;
 }
 
+.app-wrapper {
+    min-height: 100vh;
+}
+
 .app-content-wrapper {
     display: grid;
     grid-template-columns: 0.15fr 1.05fr 1.8fr;
@@ -12,6 +16,7 @@ body {
     grid-template-areas:
         ". . .";
     column-gap: 1em;
+    min-height: inherit;
 }
 
 .app-content-wrapper > div:nth-child(3) {

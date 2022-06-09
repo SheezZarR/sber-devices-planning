@@ -19,6 +19,11 @@
     line-height: 1.125em;
     padding: 1rem;
 }
+
+.react-calendar > button {
+    border-radius: 6px;
+}
+
 .react-calendar--doubleView {
     width: 700px;
 }
@@ -88,9 +93,7 @@
     font-size: 0.75em;
     font-weight: bold;
 }
-.react-calendar__month-view__days__day--weekend {
-    color: #d10000;
-}
+
 .react-calendar__month-view__days__day--neighboringMonth {
     color: #4d504d;
 }

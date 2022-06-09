@@ -3,7 +3,12 @@ import {TaskItem} from "./Task_list_item";
 import '../Styles/Task_list.css'
 
 export const Task_list = (props) => {
-    const{date, tasks} = props
+    const {date, tasks} = props
+
+    const [tasksList, setTasks] = useState(() => {
+        return tasks;
+    });
+    
 
     return (
         <div className="Tasklist">
@@ -11,10 +16,10 @@ export const Task_list = (props) => {
                 <strong>{date}</strong>
             </div>
             {
-                tasks.map((Task_Item) => (
+                tasksList.map((taskItem) => (
                     <TaskItem
-                        id={Task_Item.id}
-                        text={Task_Item.text}
+                        id={taskItem.id}
+                        text={taskItem.title}
                     />
                 ))
             }
