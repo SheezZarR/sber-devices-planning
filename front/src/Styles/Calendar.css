@@ -11,7 +11,10 @@
 }
 
 .react-calendar {
-    background-color: clear;
+    /* background: rgb(20,116,70);
+    background: linear-gradient(90deg, rgba(20,116,70,0.6) 20%, rgba(0,133,255,0.1) 50%, rgba(6,22,33,1) 90%); */
+    background: rgb(20,116,70);
+    background: linear-gradient(90deg, rgba(20,116,70,0.6) 20%, rgba(0,133,255,0.1) 80%);
     color: #2cb049;
     border-radius: 8px;
     box-shadow: 0 12px 24px rgb(63, 147, 90);

@@ -1,7 +1,7 @@
 .modal {
     top: 0;
     left: 0;
-    position: absolute;
+    position: fixed;
     min-height: 100vh;
     min-width: 100vw;
     display: flex;
@@ -21,10 +21,13 @@
 .modal-content {
     border-radius: 10px;
     padding: 2rem;
-    display: grid;
-    row-gap: 1rem;
     overflow-y: auto;
     max-height: 600px;
+}
+
+.modal-content {
+    display: grid;
+    row-gap: 1rem;
 }
 
 .controls {

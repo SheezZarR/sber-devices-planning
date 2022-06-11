@@ -18,7 +18,7 @@ export const Task_list = (props) => {
             {
                 tasksList.map((taskItem) => (
                     <TaskItem
-                        id={taskItem.id}
+                        id={taskItem.Task}
                         text={taskItem.title}
                     />
                 ))

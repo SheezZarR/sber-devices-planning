@@ -37,19 +37,19 @@ const initAssistant = (getState) => {
 }
 
 const App = () => {
-	const assistantStateRef = useRef(null);
-	const assistant = useRef(null);
+	// const assistantStateRef = useRef(null);
+	// const assistant = useRef(null);
 	const [sberUserId, setSberUserId] = useState(null);
 
-	useEffect(() => {
-		assistant.current = initAssistant(() => assistantStateRef.current);
-		assistant.current.on("data", ({ action }) => {
-			console.log(action)
-			if (action && action.type === "get_user_id") {
-				setSberUserId(action['user_id']);
-			}
-		}) 
-	}, [assistant, assistantStateRef]);
+	// useEffect(() => {
+	// 	assistant.current = initAssistant(() => assistantStateRef.current);
+	// 	assistant.current.on("data", ({ action }) => {
+	// 		console.log(action)
+	// 		if (action && action.type === "get_user_id") {
+	// 			setSberUserId(action['user_id']);
+	// 		}
+	// 	}) 
+	// }, [assistant, assistantStateRef]);
 
 	function dispatchAssistantAction(action) {
 		console.log("Assistant action");
@@ -57,7 +57,7 @@ const App = () => {
 	};
 
 	const [tasks, setTasks] = useState(() => { return []; })
-	const [modalActive, setModalActive] = useState(true)
+	const [modalActive, setModalActive] = useState(false)
 
     useEffect(() => {
         fetch(`http://127.0.0.1:8001/api/formated_tasks/`)
@@ -85,7 +85,12 @@ const App = () => {
 			</div>
 			{/*<Achievements/>
 			<Profile/>*/}
-			<Modal sberUserId={sberUserId} active={modalActive} setModalActive={setModalActive}/>
+			<Modal 
+				sberUserId={sberUserId} 
+				active={modalActive} 
+				setModalActive={setModalActive}
+				updateTaskList={updateTaskList}
+			/>
 		</div>
   );
 }

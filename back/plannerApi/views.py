@@ -18,7 +18,9 @@ class UserViewSet(viewsets.ModelViewSet):
 class TaskDictTimeQueryset(APIView):
 
     def get(self, request):
-        tasks_by_date = Task.objects.all().order_by('-completion_date')
+        tasks_by_date = Task.objects.all().order_by('completion_date')
+        distinct_dates = tasks_by_date.values('completion_date').distinct().order_by('completion_date')
+        print(distinct_dates)
 
         if not list(tasks_by_date):
             return []
@@ -26,14 +28,13 @@ class TaskDictTimeQueryset(APIView):
         lookup_dates = []
         month_dict = dict((index, month) for index, month in enumerate(calendar.month_abbr) if month)
 
-        for item in tasks_by_date:
-            tmp_date = str(item.completion_date).rsplit(' ')[0]
+        for date in distinct_dates:
+            tmp_date = str(date['completion_date']).rsplit(' ')[0]
             date_split = tmp_date.split('-')
             if not date_split[0] == 'None':
                 lookup_dates.append({"year": date_split[0], "month": date_split[1], "day": date_split[2]})
 
         tasks_grouped_by_date = []
-
         tasks_group = []
         query_set_filtered = tasks_by_date.filter(completion_date=None)
 

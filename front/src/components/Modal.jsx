@@ -4,37 +4,56 @@ import React, {
     useRef,
     useState
 } from "react";
-
 import { P1, DatePicker, TextArea, TextField } from "@salutejs/plasma-ui";
 import { colorValues } from "@salutejs/plasma-tokens";
 
 import "../Styles/Modal.css"
 
-function gatherForm(sberUserId, title, description, date) {
+
+function addTask(sberUserId, title, description, date, updateTaskListFunc) {
+    let pythonDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     let formData = new FormData();
+
     formData.append("sber_user_id", sberUserId)
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("completion date", date);
+    formData.append("completion_date", pythonDate);
 
     fetch(`http://127.0.0.1:8001/api/tasks/`, {
         method: "POST",
         body: formData
     })
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(json => {
+        console.log(json)
+        updateTaskListFunc();
+    })
     .catch(error => {console.error(error)})
 }
 
+
 const Modal = (props) => {
-    const {active, setModalActive, sberUserId} = props;
+    const {active, setModalActive, sberUserId, updateTaskList} = props;
     
     const [taskTitle, setTaskTitle] = useState(null);
     const [taskDescription, setTaskDescription] = useState(null);
-    const [taskDate, setTaskDate] = useState(null);
+    const [taskDate, setTaskDate] = useState(new Date());
+
+    const handleDateUpdate = (value) => {
+        setTaskDate(value);
+    }
 
     const modal_colors = {
         backgroundColor: colorValues.dark02
+    }
+
+    useEffect(() => {
+        console.log(taskDate);
+    }, [taskDate])
+
+    function handleModalSubmit(event) {
+        setModalActive(false); 
+        addTask(sberUserId, taskTitle, taskDescription, taskDate, updateTaskList);
     }
 
     return (
@@ -55,12 +74,12 @@ const Modal = (props) => {
                 <DatePicker
                     min={new Date(2022, 0, 0, 0, 0, 0)}
                     max={new Date(2025, 0, 0, 0, 0, 0)}
-                    value={new Date()}
-                    onChange={value => {setTaskDate(value)}}
+                    value={taskDate}
+                    onChange={handleDateUpdate}
                 ></DatePicker>
                 <div className="controls">
                     <Button text="Закрыть" view="clear" onClick={() => setModalActive(false)} size="s"></Button>
-                    <Button text="Добавить" view="success" size="s" onClick={e => gatherForm(sberUserId, taskTitle, taskDescription, taskDate)}></Button>
+                    <Button text="Добавить" view="success" size="s" onClick={e => handleModalSubmit(e)}></Button>
                 </div>
             </div>
         </div>
