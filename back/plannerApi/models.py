@@ -18,13 +18,13 @@ class TasksType(models.Model):
 
 class Task(models.Model):
     Task = models.AutoField(primary_key=True)
-    sber_user_id = models.CharField(max_length=255, default="")
+    sber_user_id = models.CharField(max_length=255, blank=False)
     title = models.CharField(max_length=255)
     description = models.TextField(default=None, null=True)
     start_task_date = models.DateField(auto_now_add=True)
     completion_date = models.DateField(default=None, null=True)
     task_category = models.ForeignKey(to='TasksType', default=None, null=True, on_delete=models.CASCADE, related_name='type_task')
-    completion = models.BooleanField(default=None)
+    completion = models.BooleanField(default=False)
 
 
 class Subtasks(models.Model):

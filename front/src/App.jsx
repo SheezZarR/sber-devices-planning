@@ -1,4 +1,3 @@
-
 import React, { 
 	useEffect,
 	useRef,
@@ -28,7 +27,7 @@ import './Styles/App.css';
 const initAssistant = (getState) => {
 	if (process.env.NODE_ENV === "development") {
 		return createSmartappDebugger({
-			token: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZGE2NDZlMDc5NDA3MjNkMDk1NDQ5ZjRiNjNjNDc1ZGMyNzBlZTExNmEwN2Q0ZWFjNGNlYzY2ZGRiMmZmYzlhNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTY1NDg2NDU3OCwiaWF0IjoxNjU0Nzc4MTY4LCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiNmE4ZGE1OTEtOTdmMC00NDk3LWE3YjYtZmJlZjQyMjk2YTA4Iiwic2lkIjoiMzJkOTk2YWItODc5My00NWM2LThjYTgtYzQzMmYyMWRjYjdjIn0.A0kbe85YuN4cOqtrs9PAkmle36MEWjajILgUC2rR5lfB3zmXE6gYI3JfVdivMBaM6lu1wknrHt35nQJf2Ska8AGE95eapMIkPxQqC3RVWcrBUqxqv2PmT0bSwgHyZKpnHe75qOnKdGffmy7Q36HzL1DPb2W1ujCPiLKwsTZoXlLG4niOMkDMMZJO-reGmd58TcyWUrONfJRWFXDwaer61KqUoNbwTJ6dfZPLemuWEbJHI-2e0fG9nqYT-oJZJV6VwsE3-uaW7UWxmg6JTb7ZPY3EHcnJDVnW8QlzPh97jOCFfQx2eQz7PGQWVoRfSOp5nYCDSSNvUpmT_yZuWMaF2Loej9Q5KyDW2Io57yh0-PwuK77KUdCV72XvbRrYLQTtMe8jwCdkq4bIZZq_t2bhDoPxMu-4sw-3ZUhm1zJ0dj4rL0bb5_S1RjSs9GmSZZxVh1-VNpbDI2EY0E96jCjXofWq2ktS0xT1w8-cS_G7nMH5TnRgnc0T8gcjSVQM1X-hDxbOt23a7qnC65jtbRdHt33B8lH0Uu1vXSDewwG3Ru73VMLJYsvCTtE7ptmHpzgSlhmcThKXWkSdUL_4ubbpEQ6lt2UG6N9txbBjdF0FedTHxd-7NrRLNE0Y_QesoMKoM-FRrXMMK58c8HnbjClVSFSk67ftuj299eD1mNKKlF4",
+			token: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZGE2NDZlMDc5NDA3MjNkMDk1NDQ5ZjRiNjNjNDc1ZGMyNzBlZTExNmEwN2Q0ZWFjNGNlYzY2ZGRiMmZmYzlhNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTY1NTY0ODY1MywiaWF0IjoxNjU1NTYyMjQzLCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiMDk0OGFkYjEtMjcxNC00NjEwLWI2ZWEtNzZkY2I2YzFhNzU4Iiwic2lkIjoiZGRiMTEwZTYtNThiOC00MzE5LTk3MGYtMjRiOTMyYTgyNzVmIn0.YjOFb1ZcGlNWPN_K5t1kkPPFfns41V7WM8c-sfUjnM1WT8V4d_EPq88B1ckVM_Z1qK1bHq1g4-b6cpeu06xSXiBIfutxYed1lAGnMG9a3gB_8leWh0QD5sLdTjxryUp4prrLRML4n-Lcvo7JhCiuERuv-GZuCtpPoW24klcmzNYapjosSYOnZvrnpt_bvl5AIupAJ25aIXgAa5zf-rBiFEwFSI_TbGWr_WWqYa75GymnQaXri7c3zxRAVNveH2gVriX_rhD-r7_uTJ0VUNUQV2EvZk31SyBy4afMXJSYrcyaovHE5ELNf7Tk5fagFk0DsonjlMPlxUKv_DmnTVw-wExN9GDpptLZ4rAVvtYbej63gFcfZDT1wwajcs1SjV2hAPbr0lFPJKRYxztBWelNcBNxRLBjzsHLW2b0k8jN-UVJbbDcnyzYLl36acn3RsM8P8W_5eotolFv0B5aF4m9Ol0N0MSDX7tn5ckI63DSHQqCdLB_eWmS5elIt2pnCv0eluSA1vM_o86DB4mr6qsoK9DyIV7PG9BzyHflHEVAL66R4AZD_Y5lXoYVv4fO16qgIKZxX716iLXZjcgbclzUcJ8k3WPo_45Cw-8wsvGje4qz_nkv2zGjlT_olzdIgyAJZA-_STWPD2QKgyVMYG0U3793vvwJv83Ue6HxQcXSdZk",
 			initPhrase: "Открой Plan Up",
 			getState
 		});
@@ -37,38 +36,71 @@ const initAssistant = (getState) => {
 }
 
 const App = () => {
-	// const assistantStateRef = useRef(null);
-	// const assistant = useRef(null);
+	const assistantStateRef = useRef(null);
+	const assistant = useRef(null);
 	const [sberUserId, setSberUserId] = useState(null);
 
 	// useEffect(() => {
-	// 	assistant.current = initAssistant(() => assistantStateRef.current);
-	// 	assistant.current.on("data", ({ action }) => {
-	// 		console.log(action)
-	// 		if (action && action.type === "get_user_id") {
-	// 			setSberUserId(action['user_id']);
-	// 		}
-	// 	}) 
-	// }, [assistant, assistantStateRef]);
+	//  	assistant.current = initAssistant(() => assistantStateRef.current);
+	//  	assistant.current.on("data", ({ action }) => {
+	//  		console.log(action)
+	// 		// dispatchAssistantAction(action);
+	//  		if (action && action.type === "get_user_id") {
+	//  			setSberUserId(action['user_id']);
+	//  		}
+	//  	}) 
+	//  }, [assistant, assistantStateRef]);
 
 	function dispatchAssistantAction(action) {
-		console.log("Assistant action");
+		console.log(`Assistant action: ${JSON.stringify(action)}`);
+		
+		switch(action['type']) {
+			case "add_note":
+				console.log("Adding note")
+				break;
+			
+			case "delete_note":
+				console.log("Removing note")
+				break;
+
+			default:
+				console.log(`Unknown action type: ${action['type']}`)
+		}
 
 	};
 
 	const [tasks, setTasks] = useState(() => { return []; })
 	const [modalActive, setModalActive] = useState(false)
+	const [taskListHeadline, setTaskListHeadline] = useState("Активные")
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8001/api/formated_tasks/`)
+        fetch(`http://127.0.0.1:8001/api/formated_tasks/?isCompleted=False`)
         .then(response => response.json())
         .then(json => setTasks(json))
     }, [])
   
-	function updateTaskList() {
-		fetch(`http://127.0.0.1:8001/api/formated_tasks/`)
-        .then(response => response.json())
-        .then(json => setTasks(json))
+	function updateTaskList(location = "home") {
+		
+		if (location === "home") {
+			fetch(`http://127.0.0.1:8001/api/formated_tasks/?isCompleted=False`)
+			.then(response => response.json())
+			.then(json => {
+				console.log(`Home json: ${JSON.stringify(json)}`); 
+				setTasks(json); 
+				setTaskListHeadline("Активные");
+			})
+			
+
+		} else if (location === "archive") {
+			fetch(`http://127.0.0.1:8001/api/formated_tasks/?isCompleted=True`)
+			.then(response => response.json())
+			.then(json => {
+				console.log(`Archive json: ${JSON.stringify(json)}`)
+				setTasks(json); 
+				setTaskListHeadline("Архив")
+			})
+		}
+		
 	}
 
   return (
@@ -79,7 +111,7 @@ const App = () => {
 					updateTaskList={updateTaskList}
 					setModalActive={setModalActive}
 				/>
-				<Tasks taskList={tasks}/>
+				<Tasks headline={taskListHeadline} taskList={tasks}/>
 				<Calendar_menu/>
 				
 			</div>

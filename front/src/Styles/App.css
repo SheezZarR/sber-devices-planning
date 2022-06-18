@@ -23,6 +23,11 @@ body {
     padding: 1em;
 }
 
+.tasks-wrapper > div:first-child { 
+    margin-top: 2rem;
+    text-align: center;
+}
+
 .App {
     overflow-x: hidden;
 }

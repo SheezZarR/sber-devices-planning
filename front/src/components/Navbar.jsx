@@ -3,8 +3,9 @@ import { Button } from '@salutejs/plasma-ui';
 import { 
     IconSettings, 
     IconStarFill, 
-    IconEvent,
-    IconPlusCircle 
+    IconCardstack,
+    IconPlusCircle,
+    IconHouse
 } from '@salutejs/plasma-icons';
 import history from './../history';
 
@@ -16,8 +17,11 @@ const Navbar = (props) => {
     return (
         <div className='nav-wrapper'>
             <div className='nav'>
-                <Button size="m" contentLeft={<IconEvent color="green"/>} view="clear"
-                        onClick={() => history.push('/Tasks')}/>
+                <Button size="m" contentLeft={<IconHouse color="green"/>} view="clear"
+                    onClick={() => updateTaskList("home")}
+                ></Button>
+                <Button size="m" contentLeft={<IconCardstack color="green"/>} view="clear"
+                        onClick={() => updateTaskList("archive")}/>
                 <Button size="m" contentLeft={<IconStarFill color="yellow"/>} view="clear"
                         onClick={() => history.push('/Achievements')}/>
                 <Button size="m" contentLeft={<IconSettings/>} view="clear" onClick={() => history.push('/Profile')}/>

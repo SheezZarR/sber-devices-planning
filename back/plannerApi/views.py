@@ -1,4 +1,5 @@
 import calendar
+import json
 
 from django.forms import model_to_dict
 from django.http import JsonResponse
@@ -18,12 +19,16 @@ class UserViewSet(viewsets.ModelViewSet):
 class TaskDictTimeQueryset(APIView):
 
     def get(self, request):
-        tasks_by_date = Task.objects.all().order_by('completion_date')
-        distinct_dates = tasks_by_date.values('completion_date').distinct().order_by('completion_date')
-        print(distinct_dates)
+        tasks_by_date = None
+        if 'isCompleted' in request.GET:
+            tasks_by_date = Task.objects.all().filter(completion=request.GET['isCompleted']).order_by('completion_date')
+        else:
+            return Response(data=[], status=200)
 
         if not list(tasks_by_date):
-            return []
+            return Response(data=[], status=200)
+
+        distinct_dates = tasks_by_date.values('completion_date').distinct().order_by('completion_date')
 
         lookup_dates = []
         month_dict = dict((index, month) for index, month in enumerate(calendar.month_abbr) if month)
@@ -36,7 +41,11 @@ class TaskDictTimeQueryset(APIView):
 
         tasks_grouped_by_date = []
         tasks_group = []
-        query_set_filtered = tasks_by_date.filter(completion_date=None)
+        if 'isCompleted' in request.GET:
+
+            query_set_filtered = tasks_by_date.filter(completion_date=None, completion=request.GET['isCompleted'])
+        else:
+            query_set_filtered = []
 
         for item in query_set_filtered:
             tasks_group.append(TaskSerializer(item).data)

@@ -1,8 +1,19 @@
-.task_item {
+.task-item {
     margin: 8px;
+    max-width: 40vw !important;
+}
+
+.task-item > span {
+    white-space: normal !important;
+    text-overflow: initial;
 }
 
 /* This is needed to remove user agent default margin. */
-.task_item > input {
+.task-item > input {
     margin: 0;
+}
+
+.task-item.task-item-isCompleted {
+    text-decoration: line-through;
+    color: #a19797;
 }

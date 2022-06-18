@@ -1,4 +1,4 @@
-import { Button, Headline3 } from "@salutejs/plasma-ui";
+import { Button, Checkbox, Headline3 } from "@salutejs/plasma-ui";
 import React, {
     useEffect, 
     useRef,
@@ -11,13 +11,18 @@ import "../Styles/Modal.css"
 
 
 function addTask(sberUserId, title, description, date, updateTaskListFunc) {
-    let pythonDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    let pythonDate = null;
     let formData = new FormData();
+
+    if (date){
+        pythonDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+        formData.append("completion_date", pythonDate);
+    }
 
     formData.append("sber_user_id", sberUserId)
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("completion_date", pythonDate);
+    
 
     fetch(`http://127.0.0.1:8001/api/tasks/`, {
         method: "POST",
@@ -38,6 +43,7 @@ const Modal = (props) => {
     const [taskTitle, setTaskTitle] = useState(null);
     const [taskDescription, setTaskDescription] = useState(null);
     const [taskDate, setTaskDate] = useState(new Date());
+    const [displayDatePicker, setDisplayDatePicker] = useState(true);
 
     const handleDateUpdate = (value) => {
         setTaskDate(value);
@@ -53,7 +59,14 @@ const Modal = (props) => {
 
     function handleModalSubmit(event) {
         setModalActive(false); 
-        addTask(sberUserId, taskTitle, taskDescription, taskDate, updateTaskList);
+        
+        addTask(
+            sberUserId, 
+            taskTitle, 
+            taskDescription, 
+            displayDatePicker ? taskDate : null, 
+            updateTaskList
+            );
     }
 
     return (
@@ -71,11 +84,19 @@ const Modal = (props) => {
                     label="Комментарии к задаче"
                     onChange={e => setTaskDescription(e.target.value)}
                 ></TextArea>
+                <Checkbox
+                    label="Добавить дату"
+                    defaultChecked={displayDatePicker}
+                    onChange={(e) => {setDisplayDatePicker(displayDatePicker ? false : true)}}
+                />
                 <DatePicker
                     min={new Date(2022, 0, 0, 0, 0, 0)}
                     max={new Date(2025, 0, 0, 0, 0, 0)}
                     value={taskDate}
                     onChange={handleDateUpdate}
+                    style={{
+                        display: displayDatePicker ? "flex" : "none"
+                    }}
                 ></DatePicker>
                 <div className="controls">
                     <Button text="Закрыть" view="clear" onClick={() => setModalActive(false)} size="s"></Button>

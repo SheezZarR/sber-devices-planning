@@ -1,14 +1,12 @@
 import React,{ useState } from 'react'
 import {TaskItem} from "./Task_list_item";
 import '../Styles/Task_list.css'
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 export const Task_list = (props) => {
     const {date, tasks} = props
-
-    const [tasksList, setTasks] = useState(() => {
-        return tasks;
-    });
-    
+    console.log("Task_List", date, tasks)
 
     return (
         <div className="Tasklist">
@@ -16,10 +14,12 @@ export const Task_list = (props) => {
                 <strong>{date}</strong>
             </div>
             {
-                tasksList.map((taskItem) => (
+                tasks.map((taskItem) => (
                     <TaskItem
+                        key={taskItem.title + taskItem.Task.toString()}
                         id={taskItem.Task}
                         text={taskItem.title}
+                        completed={taskItem.completion}
                     />
                 ))
             }

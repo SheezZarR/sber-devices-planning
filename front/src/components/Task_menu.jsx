@@ -7,11 +7,12 @@ import "../Styles/TaskMenu.css"
 const Task_menu = (props) => {
 
     const {taskList} = props
+    console.log("TaskMenu", taskList)
     
     return (
         <div className="Task_Menu">
             {taskList.map((task) =>
-                <Task_list date={task.date} tasks={task.tasks}/>
+                <Task_list key={task.date} date={task.date} tasks={task.tasks}/>
             )}
         </div>
     );
