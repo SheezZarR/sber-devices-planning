@@ -12,16 +12,15 @@ import history from './../history';
 import "../Styles/Navbar.css";
 
 const Navbar = (props) => {
-    const {updateTaskList, setModalActive} = props
+    const {updateTaskList, setModalActive, setTaskListHeadline} = props
 
     return (
         <div className='nav-wrapper'>
             <div className='nav'>
                 <Button size="m" contentLeft={<IconHouse color="green"/>} view="clear"
-                    onClick={() => updateTaskList("home")}
-                ></Button>
+                    onClick={() => {updateTaskList("Активные")}}/>
                 <Button size="m" contentLeft={<IconCardstack color="green"/>} view="clear"
-                        onClick={() => updateTaskList("archive")}/>
+                        onClick={() => {updateTaskList("Архив")}}/>
                 <Button size="m" contentLeft={<IconStarFill color="yellow"/>} view="clear"
                         onClick={() => history.push('/Achievements')}/>
                 <Button size="m" contentLeft={<IconSettings/>} view="clear" onClick={() => history.push('/Profile')}/>

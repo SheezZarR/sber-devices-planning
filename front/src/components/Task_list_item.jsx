@@ -8,16 +8,17 @@ import {Checkbox} from "@salutejs/plasma-ui";
 import '../Styles/Task_list_item.css'
 
 export const TaskItem = (props) => {
-    const {id, text, completed} = props;
+    const {id, text, date, completed, removeTaskFromList} = props;
     
+    const taskRef = useRef();
     const taskId = useRef(id);
     const taskText = useRef(text);
+    const taskDate = useRef(date)
     const [isCompleted, setIsCompleted ] = useState(completed);
     const isCompletedRef = useRef(completed)
 
     useEffect(() => {
         if (isCompleted != isCompletedRef.current) {
-            console.log("Task")
             isCompletedRef.current = isCompleted;
             completeTask();
         } 
@@ -37,16 +38,19 @@ export const TaskItem = (props) => {
             body: JSON.stringify(data)
         })
         .then(response => response.json())
-        .then(json => {})
+        .then(json => {
+            removeTaskFromList(taskDate.current, taskId.current);
+        })
         .catch(error => console.error(error));
     }
 
     return(
-        <div className={isCompleted ? "task-item task-item-isCompleted" : "task-item"}>
+        <div ref={taskRef} className={isCompleted ? "task-item task-item-isCompleted" : "task-item"}>
             <div className="task_item_content">
                 <Checkbox
                     label={taskText.current}
                     id={taskId.current}
+                    date={taskDate.current}
                     defaultChecked={isCompleted}
                     onChange={(e) => {setIsCompleted(isCompleted ? false : true )}}
                 />

@@ -6,13 +6,12 @@ import "../Styles/TaskMenu.css"
 
 const Task_menu = (props) => {
 
-    const {taskList} = props
-    console.log("TaskMenu", taskList)
+    const {taskList, taskListTitle, removeTaskFromList} = props;
     
     return (
         <div className="Task_Menu">
             {taskList.map((task) =>
-                <Task_list key={task.date} date={task.date} tasks={task.tasks}/>
+                <Task_list key={task.date + taskListTitle} date={task.date} tasks={task.tasks} removeTaskFromList={removeTaskFromList}/>
             )}
         </div>
     );

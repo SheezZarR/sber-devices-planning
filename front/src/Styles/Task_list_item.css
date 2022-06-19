@@ -5,7 +5,7 @@
 
 .task-item > span {
     white-space: normal !important;
-    text-overflow: initial;
+    text-overflow: initial !important;
 }
 
 /* This is needed to remove user agent default margin. */

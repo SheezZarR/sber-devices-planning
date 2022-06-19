@@ -5,8 +5,7 @@ import { useEffect } from 'react';
 import { useRef } from 'react';
 
 export const Task_list = (props) => {
-    const {date, tasks} = props
-    console.log("Task_List", date, tasks)
+    const {date, tasks, removeTaskFromList} = props
 
     return (
         <div className="Tasklist">
@@ -19,7 +18,9 @@ export const Task_list = (props) => {
                         key={taskItem.title + taskItem.Task.toString()}
                         id={taskItem.Task}
                         text={taskItem.title}
+                        date={date}
                         completed={taskItem.completion}
+                        removeTaskFromList={removeTaskFromList}
                     />
                 ))
             }

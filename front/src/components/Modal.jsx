@@ -30,8 +30,7 @@ function addTask(sberUserId, title, description, date, updateTaskListFunc) {
     })
     .then(response => response.json())
     .then(json => {
-        console.log(json)
-        updateTaskListFunc();
+        updateTaskListFunc(null);
     })
     .catch(error => {console.error(error)})
 }

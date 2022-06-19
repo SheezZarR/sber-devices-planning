@@ -1,13 +1,9 @@
 import calendar
-import json
 
-from django.forms import model_to_dict
-from django.http import JsonResponse
 from rest_framework import viewsets
 from rest_framework.views import APIView
-from rest_framework.generics import RetrieveUpdateDestroyAPIView, RetrieveAPIView, ListCreateAPIView
-from .models import *
 from rest_framework.response import Response
+
 from .serializers import *
 
 
@@ -22,6 +18,17 @@ class TaskDictTimeQueryset(APIView):
         tasks_by_date = None
         if 'isCompleted' in request.GET:
             tasks_by_date = Task.objects.all().filter(completion=request.GET['isCompleted']).order_by('completion_date')
+
+            if 'date' in request.GET:
+                tasks_by_date = tasks_by_date.filter(completion_date=request.GET['date'])
+
+            if 'date_start_range' in request.GET and 'date_end_range' in request.GET:
+                tasks_by_date = tasks_by_date.filter(completion_date__range=(
+                        request.GET['date_start_range'],
+                        request.GET['date_end_range']
+                    )
+                )
+
         else:
             return Response(data=[], status=200)
 
@@ -42,18 +49,16 @@ class TaskDictTimeQueryset(APIView):
         tasks_grouped_by_date = []
         tasks_group = []
         if 'isCompleted' in request.GET:
+            query_set_filtered = Task.objects.filter(completion_date=None, completion=request.GET['isCompleted'])
 
-            query_set_filtered = tasks_by_date.filter(completion_date=None, completion=request.GET['isCompleted'])
-        else:
-            query_set_filtered = []
+            if query_set_filtered:
+                for item in query_set_filtered:
+                    tasks_group.append(TaskSerializer(item).data)
 
-        for item in query_set_filtered:
-            tasks_group.append(TaskSerializer(item).data)
-
-        tasks_grouped_by_date.append({
-            "date": "Без даты",
-            "tasks": tasks_group
-        })
+                tasks_grouped_by_date.append({
+                    "date": "Без даты",
+                    "tasks": tasks_group
+                })
 
         for date in lookup_dates:
             tasks_group = []
@@ -71,7 +76,7 @@ class TaskDictTimeQueryset(APIView):
                 "date": date_str,
                 "tasks": tasks_group
             })
-
+        print(tasks_grouped_by_date)
         return Response(data=tasks_grouped_by_date, status=200)
 
 
