@@ -30,14 +30,15 @@ function addTask(sberUserId, title, description, date, updateTaskListFunc) {
     })
     .then(response => response.json())
     .then(json => {
-        updateTaskListFunc(null);
+        console.log("Обновляю список задач, после добавления через UI");
+        updateTaskListFunc("Активные");
     })
     .catch(error => {console.error(error)})
 }
 
 
 const Modal = (props) => {
-    const {active, setModalActive, sberUserId, updateTaskList} = props;
+    const {active, setModalActive, sberUserId, updateTaskList, taskListHeadline} = props;
     
     const [taskTitle, setTaskTitle] = useState(null);
     const [taskDescription, setTaskDescription] = useState(null);

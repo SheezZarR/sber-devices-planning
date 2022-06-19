@@ -23,6 +23,7 @@ import './Styles/Task_list_item.css';
 import './Styles/Calendar.css';
 import './Styles/App.css';
 import { isConstructorDeclaration } from 'typescript';
+import { act } from 'react-dom/test-utils';
 
 
 const initAssistant = (getState) => {
@@ -37,23 +38,35 @@ const initAssistant = (getState) => {
 }
 
 const App = () => {
-	const assistantStateRef = useRef(null);
-	const assistant = useRef(null);
+	
+
+	const [tasks, setTasks] = useState(() => { return []; })
+	const [modalActive, setModalActive] = useState(false)
+	const [taskListHeadline, setTaskListHeadline] = useState("Активные")
+	const [assistant, setAssistant] = useState();
 	const [sberUserId, setSberUserId] = useState(null);
 
-	useEffect(() => {
-	 	assistant.current = initAssistant(() => assistantStateRef.current);
-	 	assistant.current.on("data", ({ action }) => {
-			dispatchAssistantAction(action);
-	 		if (action && action.type === "get_user_id") {
-	 			setSberUserId(action['user_id']);
-	 		}
-	 	}) 
-	 }, [assistant, assistantStateRef]);
+    useEffect(() => {
+		console.log("Init...")
+        updateTaskList("Активные")
+		
+		const assistantInit = initAssistant(() => {})
+		assistantInit.on("data", ({ action }) => {
+			console.log("Init action",action);
+			if (action) {
+				console.log("Получил голосовую/текстовую комманду от ассистента")
+				console.log("Список задач у ассистента: ", tasks);
+				dispatchAssistantAction(action);
 
-	function assistantSpeak() {
+				if (action && action.type === "get_user_id") {
+					setSberUserId(action['user_id']);
+				}
+			}				
+		})
+		setAssistant(assistantInit);
+    }, [])
 
-	}
+	console.log("Список задач у приложения React: ", tasks);
 
 	function assistantAddTask(assistantAction) {
 		let pythonDate = null;
@@ -65,7 +78,7 @@ const App = () => {
 		}
 
 		formData.append("sber_user_id", sberUserId)
-		formData.append("title", assistantAction.task);
+		formData.append("title", assistantAction.task_title);
 		// formData.append("description", description);
 		
 		fetch(`http://127.0.0.1:8001/api/tasks/`, {
@@ -74,32 +87,50 @@ const App = () => {
 		})
 		.then(response => response.json())
 		.then(json => {
-			updateTaskList();
+			updateTaskList("Активные");
 		})
 		.catch(error => {console.error(error)})
 	}
 
-	function assistantCompleteTask(action) {
-		let taskIdToUpdate = -1;
-		let taskDateToUpdate = null;
-
-		for (let tsk of shadowTasks) {
-			if (tsk.title === action.task) {
-				taskIdToUpdate = tsk.id;
-				taskDateToUpdate = tsk.date;
+	function changeTaskState(taskText) {
+		console.log("changeTaskState tasks: ", tasks)		
+		if (tasks.length > 0) {
+			const cleanTask = tasks.find((l) => {
+			
+				const variable = l.tasks.filter(il => il.title.toLowerCase() == taskText.toLowerCase());
+				
+				if (variable && variable.length > 0) {
+					return variable;
+				}
+			})
+			
+			let data = {
+				"completion": (cleanTask.tasks[0].completion ? false : true)
 			}
+			
+			fetch(`http://127.0.0.1:8001/api/tasks/${cleanTask.tasks[0].Task}/`, {
+				method: "PATCH",
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
+			.then(response => response.json())
+			.then(json => {
+				removeTaskFromList(cleanTask.date, cleanTask.tasks[0].Task);
+			})
+			.catch(error => console.error(error));
 		}
-		
-		if (taskIdToUpdate !== -1 && taskDateToUpdate !== null) {
-			console.log(taskIdToUpdate, taskDateToUpdate);
-		} else {
-			// Сказать что не нашёл задачу
+	}
+
+	function assistantCompleteTask(action) {	
+		if (action) {
+			changeTaskState(action.task_title)
 		}
-		
-		
 	}
 
 	function dispatchAssistantAction(action) {
+		
 		if (action && action.type) {
 			switch(action.type) {
 				case "add_task": 
@@ -118,26 +149,16 @@ const App = () => {
 
 	};
 
-	const [tasks, setTasks] = useState(() => { return []; })
-	const [shadowTasks, setShadowTasks] = useState(() => { return []; })
-	const [modalActive, setModalActive] = useState(false)
-	const [taskListHeadline, setTaskListHeadline] = useState("Активные")
-
-    useEffect(() => {
-        updateTaskList()
-    }, [])
-
-	useEffect(() => {
-		prepareShadowTasks(tasks);
-	}, [tasks]);
 
 	function updateTaskList(location="Активные", dates=null) {
 		let getUrlPrefix = "?"
-
+		
 		if (location === "Активные") {
 			getUrlPrefix += "isCompleted=False"
-		} else {
+		} else if (location === "Архив") {
 			getUrlPrefix += "isCompleted=True"
+		} else {
+			getUrlPrefix += "";
 		}
 		
 
@@ -154,48 +175,28 @@ const App = () => {
 		.then(json => {
 			setTasks(json);
 			setTaskListHeadline(location)
+			
 		})
 		
 	}
 
 	function removeTaskFromList(taskDate, taskId){
-		if (tasks) {
-			let newTasks = tasks;
-			let neededTaskList = newTasks.filter(el => el.date == taskDate);
-			let cleanedTaskList = neededTaskList[0].tasks.filter(el => el.Task != taskId);
-			
-			neededTaskList[0].tasks = cleanedTaskList;
-			
-			let idToUpdate = -1;
 
-			for (let elem in tasks) {
-				if (elem.date === taskDate) {
-					break;
-				}
-				idToUpdate += 1;
+		if (tasks.length !== 0) {
+			const newList = structuredClone(tasks);
+			const cleanedTaskList = tasks.find(el => el.date === taskDate).tasks.filter(el => el.Task !== taskId);
+			const indToUpdate = tasks.findIndex(el => el.date === taskDate);
+		
+			if (indToUpdate !== -1) {
+				newList[indToUpdate].tasks = cleanedTaskList;
+			} else {
+				console.log("Not found")
 			}
-			
-			newTasks[idToUpdate] = neededTaskList[0];
-			setTasks(newTasks);
+
+			setTasks(newList);
 			
 		}
 		
-	}
-
-	function prepareShadowTasks(formatedTasks) {
-		let sTasks = [];
-
-		for (const taskList of tasks) {
-			for (const taskItem of taskList.tasks) {
-				sTasks.push({
-					"id": taskItem.Task,
-					"title": taskItem.title,
-					"date": taskList.date
-				})
-			}
-		}
-		
-		setShadowTasks(sTasks);
 	}
 	
   return (

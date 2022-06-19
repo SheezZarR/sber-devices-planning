@@ -7,7 +7,7 @@
     background-color: #0a343d;
     position: relative;
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
 .nav {

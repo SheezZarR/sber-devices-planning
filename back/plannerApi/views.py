@@ -1,8 +1,12 @@
 import calendar
+import json
+import pprint
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+from django.core import serializers as django_ser
 
 from .serializers import *
 
@@ -76,7 +80,8 @@ class TaskDictTimeQueryset(APIView):
                 "date": date_str,
                 "tasks": tasks_group
             })
-        print(tasks_grouped_by_date)
+
+            pprint.pprint(tasks_grouped_by_date)
         return Response(data=tasks_grouped_by_date, status=200)
 
 

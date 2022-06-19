@@ -19,6 +19,7 @@ export const TaskItem = (props) => {
 
     useEffect(() => {
         if (isCompleted != isCompletedRef.current) {
+            console.log("Task complete")
             isCompletedRef.current = isCompleted;
             completeTask();
         } 
