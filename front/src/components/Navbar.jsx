@@ -21,12 +21,12 @@ const Navbar = (props) => {
                     onClick={() => {updateTaskList("Активные")}}/>
                 <Button size="m" contentLeft={<IconCardstack color="green"/>} view="clear"
                         onClick={() => {updateTaskList("Архив")}}/>
-                <Button size="m" contentLeft={<IconStarFill color="yellow"/>} view="clear"
-                        onClick={() => history.push('/Achievements')}/>
-                <Button size="m" contentLeft={<IconSettings/>} view="clear" onClick={() => history.push('/Profile')}/>
-                <Button 
-                    size="m" 
-                    contentLeft={<IconPlusCircle/>} 
+                {/*<Button size="m" contentLeft={<IconStarFill color="yellow"/>} view="clear"*/}
+                {/*        onClick={() => history.push('/Achievements')}/>*/}
+                {/*<Button size="m" contentLeft={<IconSettings/>} view="clear" onClick={() => history.push('/Profile')}/>*/}
+                <Button
+                    size="m"
+                    contentLeft={<IconPlusCircle/>}
                     onClick={() => setModalActive(true)}
                     view="clear"></Button>
             </div>
