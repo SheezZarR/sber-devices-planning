@@ -29,7 +29,7 @@ import { act } from 'react-dom/test-utils';
 const initAssistant = (getState) => {
 	if (process.env.NODE_ENV === "development") {
 		return createSmartappDebugger({
-			token: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZGE2NDZlMDc5NDA3MjNkMDk1NDQ5ZjRiNjNjNDc1ZGMyNzBlZTExNmEwN2Q0ZWFjNGNlYzY2ZGRiMmZmYzlhNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTY1NTY2ODM2MywiaWF0IjoxNjU1NTgxOTUzLCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiOGJkYTdjY2ItMDYxMy00MjQ4LWFkODAtMzVmNDI5OWIzOTMxIiwic2lkIjoiYTQ3YWU1ZDYtNzExOS00YzQ5LTk2MzItMjc2MGIzMmMxMmIxIn0.CVn0p4hAwoQWtPPrjhQmX2CCtJjCWCKppdYJNoHp484Ra8l3IgK3O6B-WVHaPDOC0Aj8FvZ5POhikxnINHe9_XXeS42u3yQhrAfD8b0FvTCltCeqqBggNFXaDDLRi0I-Vtm8Ov5dHLPeUrI6ycDx6iqlGI6cpD0B5kSDAol59bMZv9Y4x3SFuuQscMIofuFt0o45CeVXRxwyKdORIi3syFT6yxLAPaZ0HJu2ayZHXhLqlA8oSiJg-M07G3UowdqL4xYVuhtc6L1P3TMilIAa8idZwqNYvdj3WGqJDXk9X9N3RzZ-_b8HuL0RIyHb6L40Wa1XT8uELRqfb6dcHUEONXTz2HLWSRh7I1N3fh0JIYc1_uenAUW8O4l2GRTyHbMZWKYMO9UUB_JHjZ7B4wzRaG6i8rWIZjbLwE0K7yc0gPjsWJwcE0LakCx5I-4vVMlOY3SET5UtNrXe7NTnMD9S5Y--0C6zz9P9j7ce6JKS-vwiw1dZ9AwbKc8UHm8yu4MWxGD3mCERk6gfKKYCmbtKsz4iPDDLWi4x6ROpKqu2_TNEN_u1DHoHQuX8OJ5U1hsSv_U7glSjzSooFQT1bKdOMOm61xbddEcyoMuuxuMvgdXae35RB0j3OTBnzC6rtByt6yvOdMdep7PmUlim3A3QYqx3QiPFrLHKvjz8p54WOks",
+			token: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZGE2NDZlMDc5NDA3MjNkMDk1NDQ5ZjRiNjNjNDc1ZGMyNzBlZTExNmEwN2Q0ZWFjNGNlYzY2ZGRiMmZmYzlhNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTY1NTgwNDQ2MywiaWF0IjoxNjU1NzE4MDUzLCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiYWU5MmRlNjMtODY5My00MTM3LWE5ZmEtYTBjY2Y3YjQ1NTc0Iiwic2lkIjoiM2U3YzNiNDEtNjkxYy00MTk2LTg4MTYtOTExMzlmOThiYTFlIn0.UPatgNSCaDvmRvgsLcU5dB-Uvl9WVJkP-q9D_TMjTVc_mqbU_ZOU77QARDhJUMoce-6-JGf_Y_kRuNNYTnJFp0H0WFoMzm7zcwNFOwQzsFT-BiE-z6jzjrTfG0Wn-rkcx3nClNm6By5bN5Pj119puOZCZ9bdBj7b9FQHeA3tb9crmKjygpInDf0HI0G8hkjrn_y3B7r8heDukmCY2HBLwOq9auO65MY799fHi_Z5Uvk8IkmKV8b5uYB0d_L2eWTnNxgjGAmVZOstOO6Vh3ERxQp0i2dFk5fNtGL4oNRJPVlenKyUNq6Hq9GxXLhkwWuM6qlTwkMvAH4aVNuEjiqNx3jVUCns_fSV55UPicI-bfw9soOYHYNi3yQ0m8ehieJpVHT0a1JfL4ltmf6lcjQGpUrYUf1VFTCS-Tob8GtXzqaMROmiLdzaVx6oj0cDpKh04gTVtCrjmtyCVl8Pe2uPJtZ4TweeJgN6jIhAay_clyYM69LsgIPzkBs7nxnOMqrikL3XvMcYMxQnIqKh7M5yBd7DMjRn4awVBQNgV5Fl_WirRkFgwnbzkEZTDIyJfNtuucPj798bAeazgQlrtMpc5lLPuCoP4E8Z8C-lfhrU8xIXBUZ2cV1FGsq_u53GyiOst1j9NSUqRnaWkr_yuVCRS3y5OfoklgVYl97HXoWwSP8",
 			initPhrase: "Открой Plan Up",
 			getState
 		});
@@ -80,17 +80,20 @@ const App = () => {
 		formData.append("sber_user_id", sberUserId)
 		formData.append("title", assistantAction.task_title);
 		// formData.append("description", description);
-		
-		fetch(`http://127.0.0.1:8001/api/tasks/`, {
+
+    const url = `http://127.0.0.1:8001/api/tasks/`;
+		fetch(url, {
 			method: "POST",
 			body: formData
 		})
 		.then(response => response.json())
 		.then(json => {
+      console.log(`>>> POST ${url}: res:`, json)
 			updateTaskList("Активные");
 		})
 		.catch(error => {console.error(error)})
 	}
+  
 
 	function changeTaskState(taskText) {
 		console.log("changeTaskState tasks: ", tasks)		
@@ -107,8 +110,9 @@ const App = () => {
 			let data = {
 				"completion": (cleanTask.tasks[0].completion ? false : true)
 			}
-			
-			fetch(`http://127.0.0.1:8001/api/tasks/${cleanTask.tasks[0].Task}/`, {
+
+      const url = `http://127.0.0.1:8001/api/tasks/${cleanTask.tasks[0].Task}/`;
+			fetch(url, {
 				method: "PATCH",
 				headers: {
 					'Content-Type': 'application/json'
@@ -117,6 +121,7 @@ const App = () => {
 			})
 			.then(response => response.json())
 			.then(json => {
+        console.log(`>>> PATCH ${url}: res:`, json)
 				removeTaskFromList(cleanTask.date, cleanTask.tasks[0].Task);
 			})
 			.catch(error => console.error(error));
@@ -170,9 +175,11 @@ const App = () => {
 			}
 		}
 
-		fetch(`http://127.0.0.1:8001/api/formated_tasks/${getUrlPrefix}`)
+    const url = `http://127.0.0.1:8001/api/formated_tasks/${getUrlPrefix}`;
+		fetch(url)
 		.then(response => response.json())
 		.then(json => {
+      console.log(`>>> GET ${url}: res:`, json)
 			setTasks(json);
 			setTaskListHeadline(location)
 			
