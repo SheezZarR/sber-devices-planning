@@ -48,14 +48,27 @@ const App = () => {
 
     useEffect(() => {
 		console.log("Init...")
-        updateTaskList("Активные")
-		
-		const assistantInit = initAssistant(() => {})
+		const assistantInit = initAssistant(() => {
+			// console.log("гет стейт вызван");
+			// console.log("Задачи:", tasks); 
+			const state = {
+				item_selector: {
+					items: tasks.map(({Task, title}, index )=> {
+						return {
+							number: index + 1,
+							id: Task,
+							title: title
+						}
+					}) 
+				}
+			}
+			return state;
+		})
 		assistantInit.on("data", ({ action }) => {
-			console.log("Init action",action);
+			// console.log("Init action", action);
 			if (action) {
-				console.log("Получил голосовую/текстовую комманду от ассистента")
-				console.log("Список задач у ассистента: ", tasks);
+				// console.log("Получил голосовую/текстовую комманду от ассистента")
+				// console.log("Список задач у ассистента: ", tasks);
 				dispatchAssistantAction(action);
 
 				if (action && action.type === "get_user_id") {
@@ -66,7 +79,11 @@ const App = () => {
 		setAssistant(assistantInit);
     }, [])
 
-	console.log("Список задач у приложения React: ", tasks);
+	useEffect(() => {
+		updateTaskList("Активные")
+	}, [sberUserId])
+
+	// console.log("Список задач у приложения React: ", tasks);
 
 	function assistantAddTask(assistantAction) {
 		let pythonDate = null;
@@ -80,9 +97,14 @@ const App = () => {
 		formData.append("sber_user_id", sberUserId)
 		formData.append("title", assistantAction.task_title);
 		// formData.append("description", description);
+//<<<<<<< HEAD
 
     const url = `http://127.0.0.1:8001/api/tasks/`;
 		fetch(url, {
+//=======
+//
+//		fetch(`http://ocatano.eu.pythonanywhere.com/api/tasks/`, {
+//>>>>>>> 35f3be40782ca1d45ff9e048b007bb9513919c60
 			method: "POST",
 			body: formData
 		})
@@ -96,7 +118,7 @@ const App = () => {
   
 
 	function changeTaskState(taskText) {
-		console.log("changeTaskState tasks: ", tasks)		
+		// console.log("changeTaskState tasks: ", tasks)		
 		if (tasks.length > 0) {
 			const cleanTask = tasks.find((l) => {
 			
@@ -110,9 +132,14 @@ const App = () => {
 			let data = {
 				"completion": (cleanTask.tasks[0].completion ? false : true)
 			}
-
+//<<<<<<< HEAD
+//
       const url = `http://127.0.0.1:8001/api/tasks/${cleanTask.tasks[0].Task}/`;
-			fetch(url, {
+			//fetch(url, {
+//=======
+//
+			fetch(`http://ocatano.eu.pythonanywhere.com/api/tasks/${cleanTask.tasks[0].Task}/`, {
+//>>>>>>> 35f3be40782ca1d45ff9e048b007bb9513919c60
 				method: "PATCH",
 				headers: {
 					'Content-Type': 'application/json'
@@ -147,7 +174,6 @@ const App = () => {
 					break;
 				
 				default:
-					// console.log("Idk what's dis");
 					break;
 			}
 		}
@@ -156,27 +182,33 @@ const App = () => {
 
 
 	function updateTaskList(location="Активные", dates=null) {
-		let getUrlPrefix = "?"
+		let getUrlSuffix = "?"
+
+		getUrlSuffix += `sber_user_id=${sberUserId}&`
 		
 		if (location === "Активные") {
-			getUrlPrefix += "isCompleted=False"
+			getUrlSuffix += "isCompleted=False"
 		} else if (location === "Архив") {
-			getUrlPrefix += "isCompleted=True"
+			getUrlSuffix += "isCompleted=True"
 		} else {
-			getUrlPrefix += "";
+			getUrlSuffix += "";
 		}
 		
 
 		if (dates !== null) {
 			if (dates.length > 1) {
-				getUrlPrefix += `&date_start_range=${dates[0]}&date_end_range=${dates[1]}`
+				getUrlSuffix += `&date_start_range=${dates[0]}&date_end_range=${dates[1]}`
 			} else if (dates.length === 1) {
-				getUrlPrefix += `&date=${dates[0]}`
+				getUrlSuffix += `&date=${dates[0]}`
 			}
 		}
 
+//<<<<<<< HEAD
     const url = `http://127.0.0.1:8001/api/formated_tasks/${getUrlPrefix}`;
 		fetch(url)
+//=======
+//		fetch(`http://ocatano.eu.pythonanywhere.com/api/formated_tasks/${getUrlSuffix}`)
+//>>>>>>> 35f3be40782ca1d45ff9e048b007bb9513919c60
 		.then(response => response.json())
 		.then(json => {
       console.log(`>>> GET ${url}: res:`, json)

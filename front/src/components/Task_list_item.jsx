@@ -31,7 +31,7 @@ export const TaskItem = (props) => {
             "completion": isCompleted
         }
         
-        fetch(`http://127.0.0.1:8001/api/tasks/${taskId.current}/`, {
+        fetch(`http://ocatano.eu.pythonanywhere.com/api/tasks/${taskId.current}/`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
