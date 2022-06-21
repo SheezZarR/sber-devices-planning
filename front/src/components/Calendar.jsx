@@ -31,7 +31,7 @@ function Calendar_menu(props) {
     }, [dateLeftmost, dateRightmost])
 
     return (
-        <div className='cal_menu'>
+        <div className='cal-wrapper'>
             <div className='calendar-container'>
                 <Calendar 
                     ref={reactCalendarRef}

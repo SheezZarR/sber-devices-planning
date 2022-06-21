@@ -27,8 +27,8 @@ import {isConstructorDeclaration} from 'typescript';
 import {act} from 'react-dom/test-utils';
 
 
-// const BASE_URL = 'http://127.0.0.1:8001'
-const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
+const BASE_URL = 'http://127.0.0.1:8001'
+// const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
 
 
 const initAssistant = (getState) => {
@@ -132,8 +132,10 @@ class App extends React.Component {
     console.log("changeTaskState tasks: ", this.state.tasks)
     if (this.state.tasks.length > 0) {
       const cleanTask = this.state.tasks.find((l) => {   
+        console.log(l);
 
         const variable = l.tasks.filter(il => il.title.toLowerCase() == taskText.toLowerCase());
+        console.log(variable);
 
         if (variable && variable.length > 0) {
           console.log('changeTaskState: return variable:', variable);
@@ -147,19 +149,19 @@ class App extends React.Component {
         "completion": (cleanTask.tasks[ 0 ].completion ? false : true)
       }
       const url = `${BASE_URL}/api/tasks/${cleanTask.tasks[ 0 ].Task}/`;
-      fetch(url, {
-        method:  "PATCH",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body:    JSON.stringify(data)
-      })
-        .then(response => response.json())
-        .then(json => {
-          console.log(`>>> PATCH ${url}: res:`, json)
-          this.removeTaskFromList(cleanTask.date, cleanTask.tasks[ 0 ].Task);
-        })
-        .catch(error => console.error(error));
+      // fetch(url, {
+      //   method:  "PATCH",
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body:    JSON.stringify(data)
+      // })
+      //   .then(response => response.json())
+      //   .then(json => {
+      //     console.log(`>>> PATCH ${url}: res:`, json)
+      //     this.removeTaskFromList(cleanTask.date, cleanTask.tasks[ 0 ].Task);
+      //   })
+      //   .catch(error => console.error(error));
     }
     console.log('changeTaskState: return tasks.length > 0:', this.state.tasks.length > 0);
   }
@@ -219,12 +221,11 @@ class App extends React.Component {
       })
   }
 
-  removeTaskFromList(taskDate, taskId) {
-    console.log(this)
-    if (this.state.tasks.length !== 0) {
-      const newList         = structuredClone(this.state.tasks);
-      const cleanedTaskList = this.state.tasks.find(el => el.date === taskDate).tasks.filter(el => el.Task !== taskId);
-      const indToUpdate     = this.state.tasks.findIndex(el => el.date === taskDate);
+  removeTaskFromList(AppJsx, taskDate, taskId) {
+    if (AppJsx.state.tasks.length !== 0) {
+      const newList         = structuredClone(AppJsx.state.tasks);
+      const cleanedTaskList = AppJsx.state.tasks.find(el => el.date === taskDate).tasks.filter(el => el.Task !== taskId);
+      const indToUpdate     = AppJsx.state.tasks.findIndex(el => el.date === taskDate);
 
       if (indToUpdate !== -1) {
         newList[ indToUpdate ].tasks = cleanedTaskList;
@@ -232,10 +233,10 @@ class App extends React.Component {
         console.log("Not found")
       }
 
-      this.setState({ tasks: newList });
+      AppJsx.setState({ tasks: newList });
 
     }
-    console.log('App: tasks:', this.state.tasks)
+    console.log('App: tasks:', AppJsx.state.tasks)
   }
 
   render() {
@@ -252,6 +253,7 @@ class App extends React.Component {
             headline={this.state.taskListHeadline}
             taskList={this.state.tasks}
             removeTaskFromList={this.removeTaskFromList}
+            AppJsx={this}
           />
           <Calendar_menu
             updateTaskList={(...values) => this.updateTaskList(...values)}

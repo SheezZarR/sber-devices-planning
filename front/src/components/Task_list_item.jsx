@@ -7,11 +7,11 @@ import {Checkbox} from "@salutejs/plasma-ui";
 
 import '../Styles/Task_list_item.css'
 
-// const BASE_URL = 'http://127.0.0.1:8001'
-const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
+const BASE_URL = 'http://127.0.0.1:8001'
+// const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
 
 export const TaskItem = (props) => {
-    const {id, text, date, completed, removeTaskFromList} = props;
+    const {id, text, date, completed, removeTaskFromList, AppJsx} = props;
     
     const taskRef = useRef();
     const taskId = useRef(id);
@@ -43,7 +43,7 @@ export const TaskItem = (props) => {
         })
         .then(response => response.json())
         .then(json => {
-            removeTaskFromList(taskDate.current, taskId.current);
+            removeTaskFromList(AppJsx, taskDate.current, taskId.current);
         })
         .catch(error => console.error(error));
     }
