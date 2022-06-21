@@ -16,12 +16,25 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
+def rebuild_sber_user_id(broken_id: str) -> str:
+    fixed_id = ""
+
+    for i in broken_id.split(' '):
+        fixed_id += f"{i}+"
+
+    fixed_id = fixed_id[:-1]
+
+    return fixed_id
+
+
 class TaskDictTimeQueryset(APIView):
 
     def get(self, request):
         tasks_by_date = None
-        if 'sber_user_id' in request.GET:
-            tasks_by_date = Task.objects.filter(sber_user_id=request.GET['sber_user_id'])
+
+        if 'sber_user_id' in request.GET and request.GET['sber_user_id'] != "null":
+            sber_user_id = rebuild_sber_user_id(request.GET['sber_user_id'])
+            tasks_by_date = Task.objects.filter(sber_user_id=sber_user_id)
 
             if 'isCompleted' in request.GET:
                 tasks_by_date = tasks_by_date.filter(completion=request.GET['isCompleted']).order_by('completion_date')
@@ -56,7 +69,11 @@ class TaskDictTimeQueryset(APIView):
             tasks_grouped_by_date = []
             tasks_group = []
             if 'isCompleted' in request.GET:
-                query_set_filtered = Task.objects.filter(completion_date=None, completion=request.GET['isCompleted'])
+                query_set_filtered = Task.objects.filter(
+                    sber_user_id=sber_user_id,
+                    completion_date=None,
+                    completion=request.GET['isCompleted']
+                )
 
                 if query_set_filtered:
                     for item in query_set_filtered:
@@ -85,6 +102,7 @@ class TaskDictTimeQueryset(APIView):
                 })
 
                 # pprint.pprint(tasks_grouped_by_date)
+                print(tasks_grouped_by_date)
             return Response(data=tasks_grouped_by_date, status=200)
 
         return Response(data=[], status=403)
