@@ -27,8 +27,8 @@ import {isConstructorDeclaration} from 'typescript';
 import {act} from 'react-dom/test-utils';
 
 
-//const BASE_URL = 'http://127.0.0.1:8001'
-const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
+const BASE_URL = 'http://127.0.0.1:8001'
+// const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
 
 
 const initAssistant = (getState) => {
@@ -116,14 +116,14 @@ class App extends React.Component {
       method: "POST",
       body:   formData
     })
-      .then(response => response.json())
-      .then(json => {
-        console.log(`>>> POST ${url}: res:`, json)
-        this.updateTaskList("Активные");
-      })
-      .catch(error => {
-        console.error(error)
-      })
+    .then(response => response.json())
+    .then(json => {
+      console.log(`>>> POST ${url}: res:`, json)
+      this.updateTaskList("Активные");
+    })
+    .catch(error => {
+      console.error(error)
+    })
   }
 
 
@@ -131,7 +131,7 @@ class App extends React.Component {
     console.log("changeTaskState taskText: ", taskText)
     console.log("changeTaskState tasks: ", this.state.tasks)
     if (this.state.tasks.length > 0) {
-      const cleanTask = this.state.tasks.find((l) => {
+      const cleanTask = this.state.tasks.find((l) => {   
 
         const variable = l.tasks.filter(il => il.title.toLowerCase() == taskText.toLowerCase());
 
@@ -140,6 +140,8 @@ class App extends React.Component {
           return variable;
         }
       })
+
+      console.log("Task to complete is: ", cleanTask);
 
       let data  = {
         "completion": (cleanTask.tasks[ 0 ].completion ? false : true)
@@ -218,6 +220,7 @@ class App extends React.Component {
   }
 
   removeTaskFromList(taskDate, taskId) {
+    console.log(this)
     if (this.state.tasks.length !== 0) {
       const newList         = structuredClone(this.state.tasks);
       const cleanedTaskList = this.state.tasks.find(el => el.date === taskDate).tasks.filter(el => el.Task !== taskId);

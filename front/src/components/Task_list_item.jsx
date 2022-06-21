@@ -7,19 +7,21 @@ import {Checkbox} from "@salutejs/plasma-ui";
 
 import '../Styles/Task_list_item.css'
 
+const BASE_URL = 'http://127.0.0.1:8001'
+
 export const TaskItem = (props) => {
     const {id, text, date, completed, removeTaskFromList} = props;
     
     const taskRef = useRef();
     const taskId = useRef(id);
     const taskText = useRef(text);
-    const taskDate = useRef(date)
+    const taskDate = useRef(date);
     const [isCompleted, setIsCompleted ] = useState(completed);
-    const isCompletedRef = useRef(completed)
+    const isCompletedRef = useRef(completed);
 
     useEffect(() => {
         if (isCompleted != isCompletedRef.current) {
-            console.log("Task complete")
+            console.log("Task complete");
             isCompletedRef.current = isCompleted;
             completeTask();
         } 
@@ -31,7 +33,7 @@ export const TaskItem = (props) => {
             "completion": isCompleted
         }
         
-        fetch(`http://ocatano.eu.pythonanywhere.com/api/tasks/${taskId.current}/`, {
+        fetch(`${BASE_URL}/api/tasks/${taskId.current}/`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
