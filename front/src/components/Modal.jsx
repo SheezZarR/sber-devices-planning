@@ -9,6 +9,8 @@ import { colorValues } from "@salutejs/plasma-tokens";
 
 import "../Styles/Modal.css"
 
+// const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
+const BASE_URL = 'http://127.0.0.1:8001'
 
 function addTask(sberUserId, title, description, date, updateTaskListFunc) {
     let pythonDate = null;
@@ -24,7 +26,11 @@ function addTask(sberUserId, title, description, date, updateTaskListFunc) {
     formData.append("description", description);
     
 
+<<<<<<< HEAD
     fetch(`http://ocatano.eu.pythonanywhere.com/api/tasks/`, {
+=======
+    fetch(`${BASE_URL}/api/tasks/`, {
+>>>>>>> class-version
         method: "POST",
         body: formData
     })
