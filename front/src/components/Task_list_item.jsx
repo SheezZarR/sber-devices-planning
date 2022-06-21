@@ -7,8 +7,8 @@ import {Checkbox} from "@salutejs/plasma-ui";
 
 import '../Styles/Task_list_item.css'
 
-const BASE_URL = 'http://127.0.0.1:8001'
-// const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
+// const BASE_URL = 'http://127.0.0.1:8001'
+const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
 
 export const TaskItem = (props) => {
     const {id, text, date, completed, removeTaskFromList, AppJsx} = props;

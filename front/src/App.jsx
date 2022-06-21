@@ -23,12 +23,10 @@ import './Styles/Task_list.css';
 import './Styles/Task_list_item.css';
 import './Styles/Calendar.css';
 import './Styles/App.css';
-import {isConstructorDeclaration} from 'typescript';
-import {act} from 'react-dom/test-utils';
 
 
-const BASE_URL = 'http://127.0.0.1:8001'
-// const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
+// const BASE_URL = 'http://127.0.0.1:8001'
+const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
 
 
 const initAssistant = (getState) => {
@@ -131,37 +129,36 @@ class App extends React.Component {
     console.log("changeTaskState taskText: ", taskText)
     console.log("changeTaskState tasks: ", this.state.tasks)
     if (this.state.tasks.length > 0) {
-      const cleanTask = this.state.tasks.find((l) => {   
-        console.log(l);
-
+      const neededTaskList = this.state.tasks.find((l) => {   
+        
         const variable = l.tasks.filter(il => il.title.toLowerCase() == taskText.toLowerCase());
-        console.log(variable);
 
         if (variable && variable.length > 0) {
-          console.log('changeTaskState: return variable:', variable);
-          return variable;
+          return true;
         }
       })
 
-      console.log("Task to complete is: ", cleanTask);
+      const taskToUpdate = neededTaskList.tasks.filter(l => l.title.toLowerCase() == taskText.toLowerCase());
 
       let data  = {
-        "completion": (cleanTask.tasks[ 0 ].completion ? false : true)
+        "completion": (taskToUpdate[0].completion ? false : true)
       }
-      const url = `${BASE_URL}/api/tasks/${cleanTask.tasks[ 0 ].Task}/`;
-      // fetch(url, {
-      //   method:  "PATCH",
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body:    JSON.stringify(data)
-      // })
-      //   .then(response => response.json())
-      //   .then(json => {
-      //     console.log(`>>> PATCH ${url}: res:`, json)
-      //     this.removeTaskFromList(cleanTask.date, cleanTask.tasks[ 0 ].Task);
-      //   })
-      //   .catch(error => console.error(error));
+
+      const url = `${BASE_URL}/api/tasks/${taskToUpdate[0].Task}/`;
+      
+      fetch(url, {
+        method:  "PATCH",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body:    JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(json => {
+          console.log(`>>> PATCH ${url}: res:`, json)
+          this.removeTaskFromList(this, neededTaskList.date, taskToUpdate[0].Task);
+        })
+        .catch(error => console.error(error));
     }
     console.log('changeTaskState: return tasks.length > 0:', this.state.tasks.length > 0);
   }
