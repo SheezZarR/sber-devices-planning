@@ -26,11 +26,7 @@ function addTask(sberUserId, title, description, date, updateTaskListFunc) {
     formData.append("description", description);
     
 
-<<<<<<< HEAD
-    fetch(`http://ocatano.eu.pythonanywhere.com/api/tasks/`, {
-=======
     fetch(`${BASE_URL}/api/tasks/`, {
->>>>>>> class-version
         method: "POST",
         body: formData
     })
