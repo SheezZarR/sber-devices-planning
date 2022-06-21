@@ -27,8 +27,8 @@ import {isConstructorDeclaration} from 'typescript';
 import {act} from 'react-dom/test-utils';
 
 
-const BASE_URL = 'http://127.0.0.1:8001'
-// const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
+// const BASE_URL = 'http://127.0.0.1:8001'
+const BASE_URL = 'http://ocatano.eu.pythonanywhere.com'
 
 
 const initAssistant = (getState) => {
