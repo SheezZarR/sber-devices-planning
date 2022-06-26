@@ -1,14 +1,13 @@
 import calendar
-import json
-import pprint
+import locale
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from django.core import serializers as django_ser
-
 from .serializers import *
+
+locale.setlocale(locale.LC_TIME, 'ru_RU')
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -17,27 +16,29 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 def rebuild_sber_user_id(broken_id: str) -> str:
-    fixed_id = ""
+    repaired_id = ""
 
     for i in broken_id.split(' '):
-        fixed_id += f"{i}+"
+        repaired_id += f"{i}+"
 
-    fixed_id = fixed_id[:-1]
+    repaired_id = repaired_id[:-1]
 
-    return fixed_id
+    return repaired_id
 
 
 class TaskDictTimeQueryset(APIView):
 
     def get(self, request):
         tasks_by_date = None
+        task_amount = 0
 
         if 'sber_user_id' in request.GET and request.GET['sber_user_id'] != "null":
             sber_user_id = rebuild_sber_user_id(request.GET['sber_user_id'])
-            tasks_by_date = Task.objects.filter(sber_user_id=sber_user_id)
+            tasks_by_user = Task.objects.filter(sber_user_id=sber_user_id)
+            task_amount = len(list(tasks_by_user))
 
             if 'isCompleted' in request.GET:
-                tasks_by_date = tasks_by_date.filter(completion=request.GET['isCompleted']).order_by('completion_date')
+                tasks_by_date = tasks_by_user.filter(completion=request.GET['isCompleted']).order_by('completion_date')
 
                 if 'date' in request.GET:
                     tasks_by_date = tasks_by_date.filter(completion_date=request.GET['date'])
@@ -50,10 +51,10 @@ class TaskDictTimeQueryset(APIView):
                     )
 
             else:
-                return Response(data=[], status=200)
+                return Response(data={"task_amount": task_amount, "tasks": []}, status=200)
 
-            if not list(tasks_by_date):
-                return Response(data=[], status=200)
+            if not list(tasks_by_user):
+                return Response(data={"task_amount": task_amount, "tasks": []}, status=200)
 
             distinct_dates = tasks_by_date.values('completion_date').distinct().order_by('completion_date')
 
@@ -101,11 +102,9 @@ class TaskDictTimeQueryset(APIView):
                     "tasks": tasks_group
                 })
 
-                # pprint.pprint(tasks_grouped_by_date)
-                print(tasks_grouped_by_date)
-            return Response(data=tasks_grouped_by_date, status=200)
+            return Response(data={"task_amount": task_amount, "tasks": tasks_grouped_by_date}, status=200)
 
-        return Response(data=[], status=403)
+        return Response(data={"task_amount": task_amount, "tasks": []}, status=403)
 
 
 class TaskViewset(viewsets.ModelViewSet):
