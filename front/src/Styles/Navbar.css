@@ -17,3 +17,22 @@
     top: 0;
     height: 100vh;
 }
+
+
+@media screen and (max-width: 1080px) {
+    
+    .nav {
+        flex-direction: row;
+        background-color: #0a343d;
+        max-height: 3rem;
+        position: fixed;
+        z-index: 10000;
+        padding: 0 2rem;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+    
+    .nav > button {
+        justify-self: center;
+    }
+}

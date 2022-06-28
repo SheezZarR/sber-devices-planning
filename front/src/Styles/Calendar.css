@@ -73,7 +73,6 @@
     background: none;
     font-family: "SB Sans Text";
     font-size: 20px;
-    margin-top: 8px;
 }
 .react-calendar__navigation button:disabled {
     background-color: #f0f0f0;
@@ -127,6 +126,7 @@
     text-align: center;
     line-height: 16px;
 }
+
 .react-calendar__tile:disabled {
     background-color: #f0f0f0;
 }
@@ -193,6 +193,12 @@
 }
 
 .reset-date-button {
-    margin-top: 1rem;
+    
     padding: 1rem !important;
+}
+
+@media screen and (max-width: 1080px) {
+    .react-calendar__tile {
+        padding: 15px 6.667px;
+    }
 }

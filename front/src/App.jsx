@@ -35,7 +35,7 @@ const initAssistant = (getState) => {
     return createSmartappDebugger({
       //token:
       // "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZGE2NDZlMDc5NDA3MjNkMDk1NDQ5ZjRiNjNjNDc1ZGMyNzBlZTExNmEwN2Q0ZWFjNGNlYzY2ZGRiMmZmYzlhNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTY1NTgwNDQ2MywiaWF0IjoxNjU1NzE4MDUzLCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiYWU5MmRlNjMtODY5My00MTM3LWE5ZmEtYTBjY2Y3YjQ1NTc0Iiwic2lkIjoiM2U3YzNiNDEtNjkxYy00MTk2LTg4MTYtOTExMzlmOThiYTFlIn0.UPatgNSCaDvmRvgsLcU5dB-Uvl9WVJkP-q9D_TMjTVc_mqbU_ZOU77QARDhJUMoce-6-JGf_Y_kRuNNYTnJFp0H0WFoMzm7zcwNFOwQzsFT-BiE-z6jzjrTfG0Wn-rkcx3nClNm6By5bN5Pj119puOZCZ9bdBj7b9FQHeA3tb9crmKjygpInDf0HI0G8hkjrn_y3B7r8heDukmCY2HBLwOq9auO65MY799fHi_Z5Uvk8IkmKV8b5uYB0d_L2eWTnNxgjGAmVZOstOO6Vh3ERxQp0i2dFk5fNtGL4oNRJPVlenKyUNq6Hq9GxXLhkwWuM6qlTwkMvAH4aVNuEjiqNx3jVUCns_fSV55UPicI-bfw9soOYHYNi3yQ0m8ehieJpVHT0a1JfL4ltmf6lcjQGpUrYUf1VFTCS-Tob8GtXzqaMROmiLdzaVx6oj0cDpKh04gTVtCrjmtyCVl8Pe2uPJtZ4TweeJgN6jIhAay_clyYM69LsgIPzkBs7nxnOMqrikL3XvMcYMxQnIqKh7M5yBd7DMjRn4awVBQNgV5Fl_WirRkFgwnbzkEZTDIyJfNtuucPj798bAeazgQlrtMpc5lLPuCoP4E8Z8C-lfhrU8xIXBUZ2cV1FGsq_u53GyiOst1j9NSUqRnaWkr_yuVCRS3y5OfoklgVYl97HXoWwSP8",
-      token:      "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZGE2NDZlMDc5NDA3MjNkMDk1NDQ5ZjRiNjNjNDc1ZGMyNzBlZTExNmEwN2Q0ZWFjNGNlYzY2ZGRiMmZmYzlhNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTY1NjMwMTI2MCwiaWF0IjoxNjU2MjE0ODUwLCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiZTdjYmE2YzEtYzdkYy00MTAxLTgyZmEtZDA2ZGIyNWNiOGI3Iiwic2lkIjoiMzVkYzZmODktMTlmZS00ZjRiLTlmZjUtNzliN2YxNjJkMzJhIn0.hYwr7ux1xkyef7-b2z9NFHHXssMxfqsdO0-ITXZyN8F7EUr_au8MTa2Bcz9OJnaKlXyRWyHXLtz9cLcMCXjDcJMUIWAzPbysgiTxq7t6Fd-7rX6iNDgk6yNLc8uZDTTpsbv1fy09R7n8fxzc8pkW7-hHe4YK0qErSKAmOt7-VtFW7qbFkd_Bw3Miw32wR3tGtHyJP6wXRo5HDE16nfELY7jxf-y-WbcC6SZ5xfgWupJoxNM9Pp3nGh1cXbd-1N9vn7TO3ILkVxn25XpJ3HHPrHa_hpm3DlQ8zMZRE_KbLMC-9Chj7pQGW0dI6OHP5vcfP6E8InVKv213WEAcEU_hbTsujsNYrEiTmimy4i6cKYFxcAkP8KKZ1nfwF-7nsZJ6Zn6TDfpZIxl6vtUpVL4CL3SOIsaCcG0Pkm8Hv2E5NMeaMLmj3Rlzm8hSkv5kPhY6TYPiVjE23zIfgkyZnwL59krVB3pu48ehIcea4coCmQ03SRgYwg0TMevZRPZ03ms2AyLtHpGl8hcK4biqqk6kNhmJPtvD7_iCR002M5Phe7E3UH4blXsCpCvGgr7Sl0Uf76gVZ9btenxfHneOeNpUajsyDnojHC4hQqESpS6678GFuJSUzka5IDF7yxnBpoFyBlpCyNhlPF5x3PQ7MYboU3dP4WmbRYe-OEQT8ruH6R8",
+      token:      "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZGE2NDZlMDc5NDA3MjNkMDk1NDQ5ZjRiNjNjNDc1ZGMyNzBlZTExNmEwN2Q0ZWFjNGNlYzY2ZGRiMmZmYzlhNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTY1NjUwMDg0NywiaWF0IjoxNjU2NDE0NDM3LCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiZmUxMjMxNzMtMjgxNS00ZjEzLWFmOTktZTAzZDIyZDk5ODFkIiwic2lkIjoiODY3ODZkNzctNWUxNi00NDE2LWExZGYtNjU3MTg5YzdmNmNlIn0.g5KcRbqwljrc6BctmPiHoJKAHuEFay3QxULY8Soh3rAE_K6HmHLWy0lnZSS_DmqNpV8XrlHH46_IwmwxRjX2jZu8SF00-EBzJ-4BfN32xPKMQV64Ub49u2ZDcP2ZSB3g4A6OsbDCKzAc_E_DaSLyzclmzqKho7JkmA18KH1AbCFqihNrVVpuY_X7NWXjLBM2OEJOK_QNBU5LA3Z2cGp3ScROv2nKWHYZpLrx1XWuq_5BnWPKY-Ak4SEBtAAZpVvJVBEkFhAHpQsigwems0yjPkNUPoqnbYfr-rLmpLMjVAxfWq9Vo5Dc0_N08PFrQZ9k5wRatWbCotjMEiY_fy7HNvYLnANc1-K3Pm6tFE4ixwKlanZzO4A-asGH-MN-jMs1JLNB4AC74jmTclL77FAo9UimoDAZy5feZhtQP5C13_kqhiPf--Oj1X0TYE6Kwkm6apNSGGboQpgc7NUVFbQdz6aLwFoTmozVSV_cJL9vjIjmkXT9Dqur_RvbKyJmtZc0FxCQrtbawhzx_oBUXNrWwczF79nhgcLMlbp9D43iFh7f2f7Tq2KH9cIGmNBtivvUQk2YZp2Rp8j0Ot1AA4ImtNPiuxGT-HY4aAS8bLDh5D3dVpZg3SEqkKjrF9dXtEuDGFthkn1hU_GMWvoqOb7NzLRO-SGuBKKrNkLl_zX3pwI",
       initPhrase: "Открой Plan Up Dev",
       getState
     });
@@ -104,7 +104,7 @@ class App extends React.Component {
       formData.append("completion_date", pythonDate);
     }
 
-    formData.append("sber_user_id", this.state.sberUserId)
+    formData.append("sber_user_id", this.state.sberUserId);
     formData.append("title", action.task_title);
 
     const url = `${BASE_URL}/api/tasks/`;
@@ -116,7 +116,7 @@ class App extends React.Component {
       if (response.status !== 201)
         throw new Error();
       else 
-        response.json()
+        response.json();
     })
     .then(json => {
       console.log(`>>> POST ${url}: res:`, json)
@@ -124,7 +124,6 @@ class App extends React.Component {
       this.updateTaskList("Активные");
     })
     .catch(error => {
-      console.log("Hello")
       this.state.assistant.sendData({action: {action_id:"addError", parameters: {task_title: action.task_title}}})
     })
   }
@@ -179,14 +178,14 @@ class App extends React.Component {
     }
   }
 
-  assistantShowSchedule(action) {
+  assistantGetSchedule(action) {
     const currentDate = new Date();
     let dateArr = [];
 
     if (action.date) {
       const pythonDate = `${action.date.year}-${action.date.month}-${action.date.day}`;
       
-      dateArr.push(pythonDate)
+      dateArr.push(pythonDate);
     } else {
       const currentWithOffset = new Date(currentDate.getTime() + 604800000);
       const startPythonDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDay()}`;
@@ -197,7 +196,9 @@ class App extends React.Component {
 
     this.updateTaskList(
       this.state.taskListHeadline === "Активные" ? "Активные" : "Архив",
-      dateArr
+      dateArr,
+      false,
+      true
     )
   }
 
@@ -205,7 +206,7 @@ class App extends React.Component {
     if (action && action.type) {
       switch (action.type) {
         case "get_user_id":
-          this.assistantAuthentication(action)
+          this.assistantAuthentication(action);
           break;
 
         case "add_task":
@@ -217,7 +218,7 @@ class App extends React.Component {
           break;
         
         case "get_schedule":
-          this.assistantShowSchedule(action);
+          this.assistantGetSchedule(action);
           break;
         
         default:
@@ -226,24 +227,43 @@ class App extends React.Component {
     }
   }
 
-  updateTaskList(location = "Активные", dates = null, checkAuthentication = false) {
-    let getUrlSuffix = "?"
 
-    getUrlSuffix += `sber_user_id=${this.state.sberUserId}&`
+  schedulePayload() {
+    let reformed = {
+      total_items: 0,
+      tasks: []
+    };
+
+    this.state.tasks.forEach((element, index) => {
+      element.tasks.forEach((task, index) => {
+        reformed.tasks.push({task_date: element.date, task_title: task.title}); 
+        reformed.total_items += 1;
+      })
+    })
+
+    return reformed;
+  }
+
+  updateTaskList(location = "Активные", dates = null, checkAuthentication = false, voiceTaskList = false) {
+    let getUrlSuffix = "?";
+    let isDateRange = false;
+
+    getUrlSuffix += `sber_user_id=${this.state.sberUserId}&`;
 
     if (location === "Активные") {
-      getUrlSuffix += "isCompleted=False"
+      getUrlSuffix += "isCompleted=False";
     } else if (location === "Архив") {
-      getUrlSuffix += "isCompleted=True"
+      getUrlSuffix += "isCompleted=True";
     } else {
       getUrlSuffix += "";
     }
 
     if (dates !== null) {
       if (dates.length > 1) {
-        getUrlSuffix += `&date_start_range=${dates[ 0 ]}&date_end_range=${dates[ 1 ]}`
+        getUrlSuffix += `&date_start_range=${dates[ 0 ]}&date_end_range=${dates[ 1 ]}`;
+        isDateRange = true;
       } else if (dates.length === 1) {
-        getUrlSuffix += `&date=${dates[ 0 ]}`
+        getUrlSuffix += `&date=${dates[ 0 ]}`;
       }
     }
 
@@ -251,11 +271,15 @@ class App extends React.Component {
     fetch(url)
       .then(response => response.json())
       .then(json => {
-        console.log(`>>> GET ${url}: res:`, json)
+        console.log(`>>> GET ${url}: res:`, json);
         this.setState({ tasks: json.tasks ? json.tasks : [] });
 
         if (checkAuthentication) {
-          this.state.assistant.sendData({action: {action_id: "authenticationSuccessful", parameters: {task_amount: json.task_amount}}})
+          this.state.assistant.sendData({action: {action_id: "authenticationSuccessful", parameters: {task_amount: json.task_amount}}});
+        }
+
+        if (voiceTaskList) {
+          this.state.assistant.sendData({action: {action_id: "schedule", parameters: this.schedulePayload()}});
         }
         
         this.setState({ taskListHeadline: location });

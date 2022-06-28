@@ -59,7 +59,7 @@ class TaskDictTimeQueryset(APIView):
             distinct_dates = tasks_by_date.values('completion_date').distinct().order_by('completion_date')
 
             lookup_dates = []
-            month_dict = dict((index, month) for index, month in enumerate(calendar.month_abbr) if month)
+            month_dict = dict((index, month) for index, month in enumerate(calendar.month_name) if month)
 
             for date in distinct_dates:
                 tmp_date = str(date['completion_date']).rsplit(' ')[0]

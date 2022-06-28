@@ -16,6 +16,7 @@
 .modal.modal-active {
     opacity: 1;
     pointer-events: all;
+    z-index: 999999;
 }
 
 .modal-content {
@@ -29,6 +30,8 @@
 .modal-content {
     display: grid;
     row-gap: 1rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .controls {
@@ -39,4 +42,10 @@
 
 .controls:last-child {
     align-self: flex-end;
+}
+
+@media screen and (max-height: 1080px) {
+    .modal-content {
+        max-height: 80vh;
+    }
 }

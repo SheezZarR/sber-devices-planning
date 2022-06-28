@@ -1,9 +1,9 @@
 .task-item {
     margin: 8px;
-    max-width: 40vw !important;
+    max-width: 40vw;
 }
 
-.task-item > span {
+.task_item_content > span {
     white-space: normal !important;
     text-overflow: initial !important;
 }
@@ -16,4 +16,10 @@
 .task-item.task-item-isCompleted {
     text-decoration: line-through;
     color: #a19797;
+}
+
+@media screen and (max-width: 1080px) {
+    .task-item {
+        max-width: initial;
+    }
 }

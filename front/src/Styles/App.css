@@ -22,12 +22,18 @@ body {
 
 
 @media screen and (max-width: 1080px) {
+    html {
+        font-size: 18px !important;
+    }
+    
     .app-content-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: 3rem 22rem 2fr;
         grid-template-areas:
-        "Nav Calendar Calendar"
-        "Nav List List";
-
-        grid-template-rows: 0.8fr 1.2fr;
+        "Nav Nav Nav"
+        "Calendar Calendar Calendar"
+        "List List List";
+        column-gap: unset;
     }
 }
 
