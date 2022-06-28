@@ -13,7 +13,7 @@ import history from './../history';
 import "../Styles/Navbar.css";
 
 const Navbar = (props) => {
-    const {updateTaskList, setModalActive, setTaskListHeadline} = props
+    const {updateTaskList, setModalActive, setModalContent, setTaskListHeadline} = props
 
     return (
         <div className='nav-wrapper'>
@@ -36,13 +36,13 @@ const Navbar = (props) => {
                 <Button
                     size="m"
                     contentLeft={<IconPlusCircle/>}
-                    onClick={() => setModalActive(true)}
+                    onClick={() => {setModalActive(true); setModalContent("Форма")}}
                     view="clear"
                 />
                 <Button 
                     size="m"
                     contentLeft={<IconHelp/>}
-                    onClick={() => {}}
+                    onClick={() => {setModalActive(true); setModalContent("Справка")}}
                     view="clear"
                 />
             </div>

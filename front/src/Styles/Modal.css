@@ -25,6 +25,7 @@
     overflow-y: auto;
     max-height: 600px;
     min-width: 50vw;
+    max-width: 70vw;
 }
 
 .modal-content {
@@ -32,6 +33,19 @@
     row-gap: 1rem;
     align-items: center;
     justify-content: center;
+}
+
+.modal-headline > p {
+    color: rgba(255, 255, 255, 0.5);
+
+}
+
+.modal-help-list {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.modal-help-list > li {
+    margin: 0.15rem 0;
 }
 
 .controls {
